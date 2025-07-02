@@ -3,13 +3,13 @@ nextflow_pipeline {
     name "Test pipeline"
     script "../main.nf"
     tag "pipeline"
+    options "-stub" // TODO remove once reference files are available
 
     test("-profile test") {
 
         when {
             params {
                 outdir = "$outputDir"
-                stub = true
             }
         }
 
