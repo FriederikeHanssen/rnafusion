@@ -8,7 +8,7 @@ nextflow_workflow {
     tag "fastqc"
     tag "fastp"
 
-    test("TRIM_WORKFLOW - Homo sapiens - FASTQs - fastp == true") {
+    test("TRIM_WORKFLOW - Homo sapiens - FASTQs - skip_qc == true") {
 
         when {
 
@@ -23,7 +23,7 @@ nextflow_workflow {
                             file("https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/modules/data/genomics/homo_sapiens/illumina/fastq/test_2.fastq.gz", checkIfExists: true)
                         ]
                     ])
-                input[1] = Channel.empty()
+                input[1] = []
                 input[2] = true
                 """
             }
@@ -32,21 +32,18 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { with(workflow.out) {
-                    assert snapshot(
-                        versions.collect{ file(it) },
-                        ch_reads_all[0][1].collect { file(it) },
-                        ch_reads_fusioncatcher[0][1].collect { file(it) },
-                        file(ch_fastp_html[0][1]).name,
-                        file(ch_fastp_json[0][1]),
-                        ch_fastqc_trimmed[0][1].collect { file(it).name }
-                    ).match() }
-                }
+                { assert snapshot(
+                    workflow.out.ch_reads_all,
+                    workflow.out.ch_fastp_html,
+                    workflow.out.ch_fastp_json,
+                    workflow.out.ch_fastqc_trimmed,
+                    workflow.out.versions
+                ).match() }
             )
         }
     }
 
-    test("TRIM_WORKFLOW - Homo sapiens - FASTQs - fastp == true + fasp_adaptors") {
+    test("TRIM_WORKFLOW - Homo sapiens - FASTQs - skip_qc == true + fastp_adaptors") {
 
         when {
 
@@ -70,21 +67,18 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { with(workflow.out) {
-                    assert snapshot(
-                        versions.collect{ file(it) },
-                        ch_reads_all[0][1].collect { file(it) },
-                        ch_reads_fusioncatcher[0][1].collect { file(it) },
-                        file(ch_fastp_html[0][1]).name,
-                        file(ch_fastp_json[0][1]),
-                        ch_fastqc_trimmed[0][1].collect { file(it).name }
-                    ).match() }
-                }
+                { assert snapshot(
+                    workflow.out.ch_reads_all,
+                    workflow.out.ch_fastp_html,
+                    workflow.out.ch_fastp_json,
+                    workflow.out.ch_fastqc_trimmed,
+                    workflow.out.versions
+                ).match() }
             )
         }
     }
 
-    test("TRIM_WORKFLOW - Homo sapiens - FASTQs - fastp == false") {
+    test("TRIM_WORKFLOW - Homo sapiens - FASTQs - skip_qc == false") {
 
         when {
 
@@ -99,7 +93,7 @@ nextflow_workflow {
                             file("https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/modules/data/genomics/homo_sapiens/illumina/fastq/test_2.fastq.gz", checkIfExists: true)
                         ]
                     ])
-                input[1] = Channel.empty()
+                input[1] = []
                 input[2] = false
                 """
             }
@@ -108,16 +102,13 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { with(workflow.out) {
-                    assert snapshot(
-                        versions.size() == 0,
-                        ch_reads_all[0][1].size() == 2,
-                        ch_reads_fusioncatcher[0][1].size() == 2,
-                        ch_fastp_html.size() == 0,
-                        ch_fastp_json.size() == 0,
-                        ch_fastqc_trimmed.size() == 0
-                    ).match() }
-                }
+                { assert snapshot(
+                    workflow.out.ch_reads_all,
+                    workflow.out.ch_fastp_html,
+                    workflow.out.ch_fastp_json,
+                    workflow.out.ch_fastqc_trimmed,
+                    workflow.out.versions
+                ).match() }
             )
         }
     }
