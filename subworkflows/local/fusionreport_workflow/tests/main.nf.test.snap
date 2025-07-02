@@ -22,7 +22,7 @@
                     {
                         "id": "test_sample"
                     },
-                    "test_sample_fusionreport_index.html:md5,7b589791e07b273915ba37d7c925b7cb"
+                    "test_sample_fusionreport_index.html:md5,0e8b2834ba474728572f40b84828fed3"
                 ]
             ],
             [
@@ -34,13 +34,13 @@
                 ]
             ],
             [
-                "versions.yml:md5,12718914fda3da1ae08487bde5624bc2"
+                "versions.yml:md5,996100687c8e12dcda20aff30583db79"
             ]
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "25.04.2"
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-07-02T14:47:49.632242"
+        "timestamp": "2025-07-02T15:18:20.437152"
     }
 }
