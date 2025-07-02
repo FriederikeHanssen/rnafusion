@@ -3,7 +3,6 @@ nextflow_workflow {
     name "Test Subworkflow FUSIONREPORT_WORKFLOW"
     script "../main.nf"
     workflow "FUSIONREPORT_WORKFLOW"
-
     tag "subworkflow"
     tag "fusionreport_workflow"
     tag "fusionreport"
@@ -45,12 +44,11 @@ nextflow_workflow {
             }
             params {
                 fusioninspector_only = false
-                tools_cutoff = 1
+                tools_cutoff    = 1
                 arriba          = true
                 starfusion      = true
                 fusioncatcher   = true
                 no_cosmic       = true
-                outdir               = "$outputDir"
             }
         }
 
@@ -67,6 +65,4 @@ nextflow_workflow {
             )
         }
     }
-
-
 }
