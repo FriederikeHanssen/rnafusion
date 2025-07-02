@@ -41,4 +41,3 @@ workflow ARRIBA_WORKFLOW {
         fusions_fail = ch_arriba_fusion_fail    // channel [ path, fusions_failed ]
         versions     = ch_versions              // channel [ versions             ]
     }
-

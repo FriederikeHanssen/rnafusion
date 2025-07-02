@@ -31,4 +31,3 @@ workflow FUSIONCATCHER_WORKFLOW {
         fusions  = ch_fusioncatcher_fusions     // channel [ meta, fusions ]
         versions = ch_versions                  // channel [ versions      ]
     }
-
