@@ -28,26 +28,16 @@ nextflow_workflow {
             }
 
             // Filter GTF to extract rRNA genes
-            run("GATK4_CREATESEQUENCEDICTIONARY") {
-                script "../../../../modules/nf-core/gatk4/createsequencedictionary/main.nf"
+            run("GET_RRNA_TRANSCRIPTS") {
+                script "../../../../modules/local/get_rrna_transcript/main.nf"
                 process {
                     """
                     input[0] = Channel.of(
                         [
                             [id: 'fasta'],
-                            file("https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/modules/data/genomics/homo_sapiens/genome/genome.dic", checkIfExist: true)
+                            file("https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/modules/data/genomics/homo_sapiens/genome/genome.gtf", checkIfExist: true)
                         ]
                     )                    """
-                }
-            }
-
-            // Convert rRNA GTF to BED
-            run("BEDOPS_CONVERT2BED") {
-                script "../../../../modules/nf-core/bedops/convert2bed/main.nf"
-                process {
-                    """
-                    input[0] = RRNATRANSCRIPTS.out.rrna_gtf.map{ it -> [ [id:it.Name], it ] }
-                    """
                 }
             }
 
@@ -56,11 +46,11 @@ nextflow_workflow {
                 script "../../../../modules/nf-core/gatk4/bedtointervallist/main.nf"
                 process {
                     """
-                    input[0] = BEDOPS_CONVERT2BED.out.bed
+                    input[0] = GET_RRNA_TRANSCRIPTS.out.bed
                     input[1] = Channel.of(
                         [
                             [id: 'chr22_dic'],
-                            file("https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/modules/data/genomics/homo_sapiens/genome/genome.dic", checkIfExist: true)
+                            file("https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/modules/data/genomics/homo_sapiens/genome/genome.dict", checkIfExist: true)
                         ]
                     )
                     """
@@ -88,7 +78,7 @@ nextflow_workflow {
                     ])
 
                 // ch_refflat
-                input[1] = GTF_TO_REFFLAT.out.refflat
+                input[1] = GTF_TO_REFFLAT.out.refflat.map { that -> [[id:that.Name], that] }
 
                 // ch_fasta
                 input[2] = Channel.of(
@@ -105,7 +95,7 @@ nextflow_workflow {
                     ] )
 
                 // ch rRNA interval list
-                input[4] = GATK4_BEDTOINTERVALLIST.out.rrna_interval
+                input[4] = GATK4_BEDTOINTERVALLIST.out.interval_list
                 """
             }
         }
