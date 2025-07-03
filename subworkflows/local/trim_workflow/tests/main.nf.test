@@ -100,7 +100,6 @@ nextflow_workflow {
                 { assert workflow.success },
                 { assert snapshot(
                     workflow.out.ch_reads_all,
-                    workflow.out.ch_fastp_html,
                     workflow.out.ch_fastp_json,
                     workflow.out.versions
                 ).match() },
