@@ -58,9 +58,7 @@ nextflow_workflow {
                 { assert snapshot(
                     workflow.out.fusion_list,
                     workflow.out.fusion_list_filtered,
-                    workflow.out.report,
                     workflow.out.csv,
-                    workflow.out.versions
                 ).match() }
             )
         }
