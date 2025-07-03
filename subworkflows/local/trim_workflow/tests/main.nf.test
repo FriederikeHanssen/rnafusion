@@ -36,9 +36,8 @@ nextflow_workflow {
                     workflow.out.ch_reads_all,
                     workflow.out.ch_fastp_html,
                     workflow.out.ch_fastp_json,
-                    workflow.out.ch_fastqc_trimmed,
                     workflow.out.versions
-                ).match() }
+                ).match() },
             )
         }
     }
@@ -71,9 +70,8 @@ nextflow_workflow {
                     workflow.out.ch_reads_all,
                     workflow.out.ch_fastp_html,
                     workflow.out.ch_fastp_json,
-                    workflow.out.ch_fastqc_trimmed,
                     workflow.out.versions
-                ).match() }
+                ).match() },
             )
         }
     }
@@ -106,9 +104,8 @@ nextflow_workflow {
                     workflow.out.ch_reads_all,
                     workflow.out.ch_fastp_html,
                     workflow.out.ch_fastp_json,
-                    workflow.out.ch_fastqc_trimmed,
                     workflow.out.versions
-                ).match() }
+                ).match() },
             )
         }
     }

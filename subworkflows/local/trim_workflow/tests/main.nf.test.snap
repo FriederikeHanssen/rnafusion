@@ -101,7 +101,7 @@
                     {
                         "id": "test_fastq"
                     },
-                    "test_fastq.fastp.html:md5,7e45be071f8f4593ddf00f5e57db74b7"
+                    "test_fastq.fastp.html:md5,2423dbfd1fec086c141cb4dd522b6b2d"
                 ]
             ],
             [
@@ -113,17 +113,6 @@
                 ]
             ],
             [
-                [
-                    {
-                        "id": "test_fastq"
-                    },
-                    [
-                        "test_fastq_trimmed_1_fastqc.zip:md5,58e2a533b6e392dbfa31e344b7876671",
-                        "test_fastq_trimmed_2_fastqc.zip:md5,e6fd070143b85bda39f089075ce63c91"
-                    ]
-                ]
-            ],
-            [
                 "versions.yml:md5,16187796d989b6260f572247e7dc0fc6",
                 "versions.yml:md5,bc4adfa947f4bf5a3558bcf09213841c"
             ]
@@ -132,7 +121,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-07-03T13:27:32.878389"
+        "timestamp": "2025-07-03T14:19:04.070018"
     },
     "TRIM_WORKFLOW - Homo sapiens - FASTQs - fastp == true + fastp_adaptors": {
         "content": [
