@@ -17,7 +17,7 @@
                     {
                         "id": "test_fastq"
                     },
-                    "test_fastq.fastp.html:md5,e510d6ebbae997039168bb811b7473c2"
+                    "test_fastq.fastp.html:md5,61e681c3b068c4af4628fd2b405aedf1"
                 ]
             ],
             [
@@ -39,7 +39,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-07-02T15:14:53.777513"
+        "timestamp": "2025-07-03T13:32:16.663379"
     },
     "TRIM_WORKFLOW - Homo sapiens - FASTQs - fastp == true": {
         "content": [
