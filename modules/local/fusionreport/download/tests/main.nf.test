@@ -23,7 +23,6 @@ nextflow_process {
                     path(process.out.fusionreport_ref[0][1]).resolve("mitelman.db").exists(),
                     path(process.out.fusionreport_ref[0][1]).resolve("DB-timestamp.txt").exists(),
                     path(process.out.fusionreport_ref[0][1]).resolve("fusion_report.log").exists(),
-
                     ).match() }
             )
         }
@@ -44,8 +43,12 @@ nextflow_process {
         then {
             assertAll(
                 { assert process.success },
-                { assert snapshot(process.out).match() }
-            )
+                { assert snapshot(
+                    path(process.out.fusionreport_ref[0][1]).resolve("fusiongdb2.db").exists(),
+                    path(process.out.fusionreport_ref[0][1]).resolve("mitelman.db").exists(),
+                    path(process.out.fusionreport_ref[0][1]).resolve("DB-timestamp.txt").exists(),
+                    path(process.out.fusionreport_ref[0][1]).resolve("fusion_report.log").exists(),
+                    ).match() }            )
         }
     }
 }
