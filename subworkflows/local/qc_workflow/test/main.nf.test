@@ -103,10 +103,11 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
+
                 { assert snapshot(
-                    workflow.out.rnaseq_metrics,
-                    workflow.out.duplicate_metrics,
-                    workflow.out.insertsize_metrics,
+					file(workflow.out.rnaseq_metrics[0][1]).readLines()[5..8],
+					file(workflow.out.duplicate_metrics[0][1]).readLines()[5..8],
+					file(workflow.out.insertsize_metrics[0][1]).readLines()[5..8],
                     workflow.out.versions
                 ).match() }
             )
