@@ -1,19 +1,16 @@
 {
     "Download fusionreport databases": {
         "content": [
-            "fusiongdb2.db:md5,e1ac123a744e515d3e5f85b8344d526a",
-            "mitelman.db:md5,1363795c97f77c641065ecd9ad0e484a",
             true,
             true,
-            [
-                "versions.yml:md5,fa5f13c563f431912048c1802b5a0c74"
-            ]
+            true,
+            true
         ],
         "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "24.10.2"
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2024-12-05T19:27:38.99855171"
+        "timestamp": "2025-07-03T12:35:54.993605"
     },
     "Create stub files": {
         "content": [
