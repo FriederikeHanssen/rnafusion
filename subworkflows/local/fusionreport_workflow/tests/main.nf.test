@@ -49,6 +49,7 @@ nextflow_workflow {
                 starfusion      = true
                 fusioncatcher   = true
                 no_cosmic       = true
+
             }
         }
 
