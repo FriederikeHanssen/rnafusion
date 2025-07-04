@@ -7,9 +7,9 @@ nextflow_workflow {
     tag "star"
     tag "star/genomegenerate"
     tag "star/align"
+    options "-stub"
 
-
-    test("STARFUSION_WORKFLOW - Homo sapiens - FASTQs minigenome") {
+    test("STARFUSION_WORKFLOW - Homo sapiens - stub") {
         config './nextflow.config'
 
         setup {
@@ -60,32 +60,15 @@ nextflow_workflow {
                 // ch_reads
                 input[0] = Channel.of(
                     [
-                        [ id: "test_fastqs" ],
-                        [
-                            file("https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/v0.0.1/rnaseq_1.fastq.gz", checkIfExists: true),
-                            file("https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/v0.0.1/rnaseq_2.fastq.gz", checkIfExists: true)
-                        ]
+                        [ id: "test_junction" ],
+                        []
                     ] )
 
-                // ch_gtf
-                input[1] =
-                    Channel.fromPath(
-                        "https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/minigenome.gtf", checkIfExists: true
-                    )
-                    .map{ [ [ id: it.name ], it ] }
+                // references
+                input[1] = STARFUSION_BUILD.out.reference
 
-                // ch_starindex_ref
-                input[2] = STAR_GENOMEGENERATE.out.index
-
-                // ch_fasta
-                input[3] =
-                    Channel.fromPath(
-                        "https://github.com/STAR-Fusion/STAR-Fusion-Tutorial/raw/master/minigenome.fa", checkIfExists: true
-                    )
-                    .map{ [ [ id: it.name ], it ] }
-
-                // ch_starfusion_ref
-                input[4] = STARFUSION_BUILD.out.reference
+                // fusions
+                input[2] = []
 
                 """
             }
