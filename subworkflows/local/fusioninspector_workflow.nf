@@ -42,7 +42,7 @@ workflow FUSIONINSPECTOR_WORKFLOW {
         FUSIONINSPECTOR( ch_reads_fusion, ch_starfusion_ref)
         ch_versions = ch_versions.mix(FUSIONINSPECTOR.out.versions)
 
-        if(!skip_vcf) {
+        if(!skip_vcf && !FUSIONINSPECTOR.out.tsv[1].isEmpty() && !FUSIONINSPECTOR.out.out_gtf[1].isEmpty()) {
             AGAT_CONVERTSPGFF2TSV(FUSIONINSPECTOR.out.out_gtf)
             ch_versions = ch_versions.mix(AGAT_CONVERTSPGFF2TSV.out.versions)
 
@@ -50,9 +50,7 @@ workflow FUSIONINSPECTOR_WORKFLOW {
 
             VCF_COLLECT(fusion_data, ch_hgnc_ref, ch_hgnc_date)
             ch_versions = ch_versions.mix(VCF_COLLECT.out.versions)
-        }
 
-        if (!skip_vis) {
             ch_bam_sorted_indexed_fusions = bam_sorted_indexed.join(FUSIONINSPECTOR.out.tsv)
             ARRIBA_VISUALISATION(
                 ch_bam_sorted_indexed_fusions,
@@ -62,6 +60,8 @@ workflow FUSIONINSPECTOR_WORKFLOW {
             )
             ch_versions = ch_versions.mix(ARRIBA_VISUALISATION.out.versions)
             ch_arriba_visualisation = ARRIBA_VISUALISATION.out.pdf
+        } else {
+            log.warn("FUSIONINSPECTOR confirmed no fusions, skipping VCF and visualisation steps.")
         }
 
     emit:
