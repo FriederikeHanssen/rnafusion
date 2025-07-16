@@ -14,7 +14,7 @@ process FUSIONINSPECTOR {
     output:
     tuple val(meta), path("*FusionInspector.fusions.tsv")                  , emit: tsv
     tuple val(meta), path("fi_workdir/*.gtf")                              , optional:true, emit: out_gtf
-    tuple val(meta), path("*FusionInspector.log")                          , emit: log
+    tuple val(meta), path("FusionInspector.log")                           , emit: log
     tuple val(meta), path("*html")                                         , emit: html
     tuple val(meta), path("*abridged.tsv")                                 , emit: abridged_tsv
     tuple val(meta), path("IGV_inputs")                                    , emit: igv_inputs
@@ -48,6 +48,7 @@ process FUSIONINSPECTOR {
     mkdir -p IGV_inputs
     mkdir -p fi_workdir
     mkdir -p chckpts_dir
+    touch fi_workdir/${prefix}.gtf
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
