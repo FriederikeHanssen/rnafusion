@@ -42,7 +42,14 @@ workflow FUSIONINSPECTOR_WORKFLOW {
         FUSIONINSPECTOR( ch_reads_fusion, ch_starfusion_ref)
         ch_versions = ch_versions.mix(FUSIONINSPECTOR.out.versions)
 
-        if(!skip_vcf && !FUSIONINSPECTOR.out.tsv[1].isEmpty() && !FUSIONINSPECTOR.out.out_gtf[1].isEmpty()) {
+        def tsv_nonempty = FUSIONINSPECTOR.out.tsv.filter { meta, file -> file.exists() && file.size() > 0 }
+        def gtf_nonempty = FUSIONINSPECTOR.out.out_gtf.filter { meta, file -> file.exists() && file.size() > 0 }
+
+        if (
+            !skip_vcf &&
+            tsv_nonempty &&
+            gtf_nonempty
+        ) {
             AGAT_CONVERTSPGFF2TSV(FUSIONINSPECTOR.out.out_gtf)
             ch_versions = ch_versions.mix(AGAT_CONVERTSPGFF2TSV.out.versions)
 
