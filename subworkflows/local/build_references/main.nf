@@ -167,25 +167,24 @@ workflow BUILD_REFERENCES {
 
     def ch_starfusion_ref = Channel.empty()
     if (tools.intersect(["starfusion", "ctatsplicing", "fusioninspector"])) {
-        if (!exists_not_empty(params.starfusion_ref)) {
+        if (exists_not_empty(params.starfusion_ref)) {
+            ch_starfusion_ref = Channel.fromPath(params.starfusion_ref).map { it -> [[id:it.name], it] }
+        }
+        else {
             if(!params.fusion_annot_lib) {
                 error("Expected --fusion_annot_lib to be specified when using StarFusion or any tools that depend on it")
             }
             STARFUSION_BUILD(ch_fasta, ch_gtf, params.fusion_annot_lib, params.species, params.dfam_version, params.pfam_version)
+            ch_starfusion_ref = STARFUSION_BUILD.out.reference
             ch_versions = ch_versions.mix(STARFUSION_BUILD.out.versions)
-            if (tools.contains("ctatsplicing")) {
-                CTATSPLICING_PREPGENOMELIB(
-                    STARFUSION_BUILD.out.reference,
-                    params.ctatsplicing_cancer_introns
-                )
-                ch_versions = ch_versions.mix(CTATSPLICING_PREPGENOMELIB.out.versions)
-                ch_starfusion_ref = CTATSPLICING_PREPGENOMELIB.out.reference
-            } else {
-                ch_starfusion_ref = STARFUSION_BUILD.out.reference
-            }
         }
-        else {
-            ch_starfusion_ref = Channel.fromPath(params.starfusion_ref).map { it -> [[id:it.name], it] }
+        if (tools.contains("ctatsplicing") && !exists_not_empty(params.ctatsplicing_ref)) {
+            CTATSPLICING_PREPGENOMELIB(
+                STARFUSION_BUILD.out.reference,
+                params.ctatsplicing_cancer_introns
+            )
+            ch_versions = ch_versions.mix(CTATSPLICING_PREPGENOMELIB.out.versions)
+            ch_starfusion_ref = CTATSPLICING_PREPGENOMELIB.out.reference
         }
     }
 
