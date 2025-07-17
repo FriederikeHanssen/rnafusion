@@ -85,6 +85,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Replaced local `FUSIONREPORT` and `FUSIONREPORT_DOWNLOAD` with `FUSIONREPORT_DETECT` and `FUSIONREPORT_DOWNLOAD` from nf-core [#703](https://github.com/nf-core/rnafusion/pull/703)
 - Updated arriba to v2.5.0 [#693](https://github.com/nf-core/rnafusion/pull/693)
 - Update logo [#715](https://github.com/nf-core/rnafusion/pull/715)
+- Slight documentation update [#719](https://github.com/nf-core/rnafusion/pull/719)
 
 ### Fixed
 
