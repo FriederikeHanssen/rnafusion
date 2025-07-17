@@ -104,6 +104,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix missing memory unit for fusioncatcher [#674](https://github.com/nf-core/rnafusion/pull/674)
 - Fix fusioncatcher download link [#693](https://github.com/nf-core/rnafusion/pull/693)
 - Fix fusionreport singularity container [#713](https://github.com/nf-core/rnafusion/pull/713)
+- Fix behavior when no fusion is present (log a warning and avoid running depending processes)[#714](https://github.com/nf-core/rnafusion/pull/714)
 
 ### Removed
 
