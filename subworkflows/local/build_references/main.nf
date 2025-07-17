@@ -180,7 +180,7 @@ workflow BUILD_REFERENCES {
         }
         if (tools.contains("ctatsplicing") && !exists_not_empty(params.ctatsplicing_ref)) {
             CTATSPLICING_PREPGENOMELIB(
-                STARFUSION_BUILD.out.reference,
+                ch_starfusion_ref,
                 params.ctatsplicing_cancer_introns
             )
             ch_versions = ch_versions.mix(CTATSPLICING_PREPGENOMELIB.out.versions)
