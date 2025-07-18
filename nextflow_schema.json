@@ -36,6 +36,7 @@
                 "input": {
                     "type": "string",
                     "format": "file-path",
+                    "mimetype": "text/csv",
                     "schema": "assets/schema_input.json",
                     "exists": true,
                     "pattern": "^\\S+\\.(csv|yaml|yml|json)$",
