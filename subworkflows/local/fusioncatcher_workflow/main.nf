@@ -1,10 +1,6 @@
 include { FASTP as FASTP_FOR_FUSIONCATCHER } from '../../../modules/nf-core/fastp/main'
 include { FUSIONCATCHER_FUSIONCATCHER }      from '../../../modules/nf-core/fusioncatcher/fusioncatcher/main'
 
-// TODO: Remove fusioncatcher_fusions as parameter.
-// TODO: remove dummy file. Work with Channel.empty()
-// TODO: if the files were already produced and the user want to skip the module because of this, they should be taken them from the sample sheet
-
 workflow FUSIONCATCHER_WORKFLOW {
     take:
         reads                   // channel [ meta, [ fastqs ] ]
