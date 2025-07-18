@@ -30,7 +30,7 @@ workflow STRINGTIE_WORKFLOW {
         ch_stringtie_gtf = STRINGTIE_MERGE.out.gtf
 
     emit:
-        stringtie_gtf = ch_stringtie_gtf.ifEmpty(null) // channel: [meta, gtf]
+        stringtie_gtf = ch_stringtie_gtf               // channel: [meta, gtf]
         versions      = ch_versions                    // channel: [ path(versions.yml) ]
 
     }
