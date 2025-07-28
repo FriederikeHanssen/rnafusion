@@ -47,8 +47,8 @@ workflow FUSIONINSPECTOR_WORKFLOW {
 
         if (
             !skip_vcf &&
-            tsv_nonempty &&
-            gtf_nonempty
+            FUSIONINSPECTOR.out.tsv[0][1].file.exists() && FUSIONINSPECTOR.out.tsv[0][1].file.size() > 0 &&
+            FUSIONINSPECTOR.out.out_gtf[0][1].file.exists() && FUSIONINSPECTOR.out.out_gtf[0][1].file.size() > 0
         ) {
             AGAT_CONVERTSPGFF2TSV(FUSIONINSPECTOR.out.out_gtf)
             ch_versions = ch_versions.mix(AGAT_CONVERTSPGFF2TSV.out.versions)
