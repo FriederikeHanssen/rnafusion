@@ -43,22 +43,24 @@ workflow FUSIONINSPECTOR_WORKFLOW {
         ch_versions = ch_versions.mix(FUSIONINSPECTOR.out.versions)
 
         def tsv_nonempty = FUSIONINSPECTOR.out.tsv.filter { meta, file -> file.exists() && file.size() > 0 }
+        def tsv_abridged_nonempty = FUSIONINSPECTOR.out.abridged_tsv.filter { meta, file -> file.exists() && file.size() > 0 }
+
         def gtf_nonempty = FUSIONINSPECTOR.out.out_gtf.filter { meta, file -> file.exists() && file.size() > 0 }
 
         if (
             !skip_vcf &&
-            FUSIONINSPECTOR.out.tsv[0][1].file.exists() && FUSIONINSPECTOR.out.tsv[0][1].file.size() > 0 &&
-            FUSIONINSPECTOR.out.out_gtf[0][1].file.exists() && FUSIONINSPECTOR.out.out_gtf[0][1].file.size() > 0
+            tsv_nonempty &&
+            gtf_nonempty
         ) {
-            AGAT_CONVERTSPGFF2TSV(FUSIONINSPECTOR.out.out_gtf)
+            AGAT_CONVERTSPGFF2TSV(gtf_nonempty)
             ch_versions = ch_versions.mix(AGAT_CONVERTSPGFF2TSV.out.versions)
 
-            fusion_data = FUSIONINSPECTOR.out.abridged_tsv.join(AGAT_CONVERTSPGFF2TSV.out.tsv).join(fusionreport_out).join(fusionreport_csv)
+            fusion_data = tsv_abridged_nonempty.join(AGAT_CONVERTSPGFF2TSV.out.tsv).join(fusionreport_out).join(fusionreport_csv)
 
             VCF_COLLECT(fusion_data, ch_hgnc_ref, ch_hgnc_date)
             ch_versions = ch_versions.mix(VCF_COLLECT.out.versions)
 
-            ch_bam_sorted_indexed_fusions = bam_sorted_indexed.join(FUSIONINSPECTOR.out.tsv)
+            ch_bam_sorted_indexed_fusions = bam_sorted_indexed.join(tsv_nonempty)
             ARRIBA_VISUALISATION(
                 ch_bam_sorted_indexed_fusions,
                 ch_gtf,
