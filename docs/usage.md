@@ -10,11 +10,10 @@ The pipeline is divided into two parts:
 
 1. Download and build references
 
-- specified with `--references_only` parameter
-- required only once before running the pipeline
-- **Important**: has to be run with each new release
+- Download the references from the S3 bucket (recommended) or build them with the pipeline
+- **Important**: has to be done with each new release
 
-2. Detecting fusions
+2. Running the analysis
 
 - Supported tools: `Arriba`, `FusionCatcher`, `STAR-Fusion`, `StringTie` and `CTAT-SPLICING`
 - QC: `Fastqc`, `MultiQC`, and `Picard CollectInsertSize`, `Picard CollectWgsMetrics`, `Picard Markduplicates`
@@ -32,7 +31,8 @@ aws --no-sign-request s3 sync s3://nf-core-awsmegatests/rnafusion/references/ <p
 
 The path to the downloaded references can then be provided to the pipeline with the `--genomes_base` parameter.
 
-:warning: **Please note that the references are large and can take a long time to download, so it is recommended to download them once and use them for all future runs of the pipeline.**
+> [!WARNING]
+> Please note that the references are large and can take a long time to download, so it is recommended to download them once and use them for all future runs of the pipeline.
 
 The fusion report references available on the S3 bucket do not contain information from cosmic due to licensing issues. If you want to use the cosmic database, you will need to build the fusion report references yourself by either deleting the `fusion_report_db` folder in the references directory or by specifying a different location for the fusion report directory with `--fusionreport_ref <PATH/TO/REFERENCES>`. The cosmic username and password should also be given in this case using `--cosmic_username <EMAIL>` and `--cosmic_passwd <PASSWORD>`.
 
@@ -124,8 +124,11 @@ The references are only built based on ensembl version 102. It is not possible c
 
 ### Samplesheet input
 
-You will need to create a samplesheet with information about the samples you would like to analyse before running the pipeline. The pipeline will detect whether a sample is single- or paired-end from the samplesheet - the `fastq_2` column is empty for single-end. The samplesheet has to be a comma-separated (.csv), tab-separated (.tsv), yaml (.yaml or .yml) or json (.json) file but can have as many columns as you desire. There is a strict requirement for the `sample` and `strandedness` columns. One or more of these columns should be provided too: `fastq_1`, `bam`, `cram`, `junctions` and `splice_junctions`
-A final samplesheet file consisting of both single- and paired-end data may look something like the one below. This is for 6 samples, where `TREATMENT_REP3` has been sequenced twice.
+You will need to create a samplesheet with information about the samples you would like to analyse before running the pipeline. The pipeline will detect whether a sample is single- or paired-end from the samplesheet - the `fastq_2` column is empty for single-end. 
+
+The samplesheet has to be a comma-separated (.csv), tab-separated (.tsv), yaml (.yaml or .yml) or json (.json) file but can have as many entries as you desire. There is a strict requirement for the `sample` and `strandedness` fields. One or more of these fields should be provided too: `fastq_1`, `bam`, `cram`, `junctions` and `splice_junctions`
+
+A final samplesheet file consisting of both single- and paired-end data may look something like the one below:
 
 ```csv title="samplesheet.csv"
 sample,fastq_1,fastq_2,strandedness
@@ -135,29 +138,26 @@ CONTROL_REP3,AEG588A3_S3_L002_R1_001.fastq.gz,AEG588A3_S3_L002_R2_001.fastq.gz,f
 TREATMENT_REP1,AEG588A4_S4_L003_R1_001.fastq.gz,,forward
 TREATMENT_REP2,AEG588A5_S5_L003_R1_001.fastq.gz,,forward
 TREATMENT_REP3,AEG588A6_S6_L003_R1_001.fastq.gz,,forward
-TREATMENT_REP3,AEG588A6_S6_L004_R1_001.fastq.gz,,forward
 ```
-
-As you can see above for multiple runs of the same sample, the `sample` name has to be the same when you have re-sequenced the same sample more than once e.g. to increase sequencing depth. The pipeline will concatenate the raw reads before performing any downstream analysis. Note that multiple rows per sample are not supported for samples that contain `bam`, `cram`, `junctions` and/or `splice_junctions` files.
 
 | Column             | Description                                                                                                                                                                                                                                                                                                                                                                                                                                   | Required           |
 | ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
-| `sample`           | Custom sample name. This entry will be identical for multiple sequencing libraries/runs from the same sample. Spaces in sample names are automatically converted to underscores (`_`).                                                                                                                                                                                                                                                        | :white_check_mark: |
-| `strandedness`     | Strandedness: forward or reverse.                                                                                                                                                                                                                                                                                                                                                                                                             | :white_check_mark: |
-| `fastq_1`          | Full path to FastQ file for Illumina short reads 1. File must exist, has to be gzipped and have the extension ".fastq.gz" or ".fq.gz". It's recommended to always provide the FASTQ files because the pipeline will be able to create any missing files from these. The FASTQ files are required to run `salmon`, `fusioninspector` and `fusioncatcher`.                                                                                      | :grey_question:    |
-| `fastq_2`          | Full path to FastQ file for Illumina short reads 2. File must exist, has to be gzipped and have the extension ".fastq.gz" or ".fq. It's recommended to always provide the FASTQ files because the pipeline will be able to create any missing files from these. The FASTQ files are required to run `salmon`, `fusioninspector` and `fusioncatcher`.gz".                                                                                      | :grey_question:    |
-| `bam`              | Full path to the BAM file created with STAR. File has to exist and must have the extension ".bam". It's the responsibility of the pipeline user to make sure this file has been correctly created, see the [prepare chapter](#preparing-bamcramjunctionssplice_junctions) for more information. The BAM file is required to run `ctatsplicing`, `stringtie`, `fusioninspector` and `arriba` when the `fastq_1` and `cram` fields are empty.   | :grey_question:    |
-| `bai`              | Full path to the index of the BAM file. File has to exist and must have the extension ".bai".                                                                                                                                                                                                                                                                                                                                                 | :x:                |
-| `cram`             | Full path to the CRAM file created with STAR. File has to exist and must have the extension ".cram". It's the responsibility of the pipeline user to make sure this file has been correctly created, see the [prepare chapter](#preparing-bamcramjunctionssplice_junctions) for more information. The CRAM file is required to run `ctatsplicing`, `stringtie`, `fusioninspector` and `arriba` when the `fastq_1` and `bam` fields are empty. | :grey_question:    |
-| `crai`             | Full path to the index of the CRAM file. File has to exist and must have the extension ".crai".                                                                                                                                                                                                                                                                                                                                               | :x:                |
-| `junctions`        | Full path to the file containing chimeric junctions determined by STAR. File has to exist and must have the extension ".junction". It's the responsibility of the pipeline user to make sure this file has been correctly created, see the [prepare chapter](#preparing-bamcramjunctionssplice_junctions) for more information. The junctions file is required to run `starfusion` and `ctatsplicing` when the `fastq_1` field is empty.      | :grey_question:    |
-| `splice_junctions` | Full path to the file containing splice junctions determined by STAR. File has to exist and must have the extension ".SJ.out.tab". It's the responsibility of the pipeline user to make sure this file has been correctly created, see the [prepare chapter](#preparing-bamcramjunctionssplice_junctions) for more information. The splice junctions file is required to run `ctatsplicing` when the `fastq_1` field is empty.                | :grey_question:    |
-| `seq_platform`     | The sequencing platform used to create to sequence the data in the FASTQ files. This value will take precedence over the value provided with `--seq_platform`.                                                                                                                                                                                                                                                                                | :x:                |
-| `seq_center`       | The sequencing center in which the data in the FASTQ files was sequenced. This value will take precedence over the value provided with `--seq_center`.                                                                                                                                                                                                                                                                                        | :x:                |
+| `sample`           | Custom sample name. This value needs to be unique across all entries in the samplesheet and cannot contain spaces                                                                                                                                                                                                                                                     | ✅ |
+| `strandedness`     | Strandedness: forward or reverse.                                                                                                                                                                                                                                                                                                                                                                                                             | ✅ |
+| `fastq_1`          | Full path to FastQ file for Illumina short reads 1. File must exist, has to be gzipped and have the extension ".fastq.gz" or ".fq.gz". It's recommended to always provide the FASTQ files because the pipeline will be able to create any missing files from these. The FASTQ files are required to run `salmon`, `fusioninspector` and `fusioncatcher`.                                                                                      | ❓    |
+| `fastq_2`          | Full path to FastQ file for Illumina short reads 2. File must exist, has to be gzipped and have the extension ".fastq.gz" or ".fq. It's recommended to always provide the FASTQ files because the pipeline will be able to create any missing files from these. The FASTQ files are required to run `salmon`, `fusioninspector` and `fusioncatcher`.gz".                                                                                      | ❓    |
+| `bam`              | Full path to the BAM file created with STAR. File has to exist and must have the extension ".bam". It's the responsibility of the pipeline user to make sure this file has been correctly created, see the [prepare chapter](#preparing-bamcramjunctionssplice_junctions) for more information. The BAM file is required to run `ctatsplicing`, `stringtie`, `fusioninspector` and `arriba` when the `fastq_1` and `cram` fields are empty.   | ❓    |
+| `bai`              | Full path to the index of the BAM file. File has to exist and must have the extension ".bai".                                                                                                                                                                                                                                                                                                                                                 | ❌                |
+| `cram`             | Full path to the CRAM file created with STAR. File has to exist and must have the extension ".cram". It's the responsibility of the pipeline user to make sure this file has been correctly created, see the [prepare chapter](#preparing-bamcramjunctionssplice_junctions) for more information. The CRAM file is required to run `ctatsplicing`, `stringtie`, `fusioninspector` and `arriba` when the `fastq_1` and `bam` fields are empty. | ❓    |
+| `crai`             | Full path to the index of the CRAM file. File has to exist and must have the extension ".crai".                                                                                                                                                                                                                                                                                                                                               | ❌                |
+| `junctions`        | Full path to the file containing chimeric junctions determined by STAR. File has to exist and must have the extension ".junction". It's the responsibility of the pipeline user to make sure this file has been correctly created, see the [prepare chapter](#preparing-bamcramjunctionssplice_junctions) for more information. The junctions file is required to run `starfusion` and `ctatsplicing` when the `fastq_1` field is empty.      | ❓    |
+| `splice_junctions` | Full path to the file containing splice junctions determined by STAR. File has to exist and must have the extension ".SJ.out.tab". It's the responsibility of the pipeline user to make sure this file has been correctly created, see the [prepare chapter](#preparing-bamcramjunctionssplice_junctions) for more information. The splice junctions file is required to run `ctatsplicing` when the `fastq_1` field is empty.                | ❓    |
+| `seq_platform`     | The sequencing platform used to create to sequence the data in the FASTQ files. This value will take precedence over the value provided with `--seq_platform`.                                                                                                                                                                                                                                                                                | ❌                |
+| `seq_center`       | The sequencing center in which the data in the FASTQ files was sequenced. This value will take precedence over the value provided with `--seq_center`.                                                                                                                                                                                                                                                                                        | ❌                |
 
-:white_check_mark: = Required
-:x: = Not required
-:grey_question: = One of these columns should be provided
+✅ = Required
+❌ = Not required
+❓ = One of these columns should be provided
 
 ### Preparing BAM/CRAM/junctions/splice_junctions
 

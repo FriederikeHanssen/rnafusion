@@ -5,7 +5,6 @@
 */
 
 include { BUILD_REFERENCES              }   from '../subworkflows/local/build_references'
-include { CAT_FASTQ                     }   from '../modules/nf-core/cat/fastq/main'
 include { TRIM_WORKFLOW                 }   from '../subworkflows/local/trim_workflow/main'
 include { QC_WORKFLOW                   }   from '../subworkflows/local/qc_workflow'
 include { STARFUSION                    }   from '../modules/local/starfusion/detect/main'
