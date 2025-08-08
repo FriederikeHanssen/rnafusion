@@ -155,9 +155,9 @@ TREATMENT_REP3,AEG588A6_S6_L003_R1_001.fastq.gz,,forward
 | `seq_platform`     | The sequencing platform used to create to sequence the data in the FASTQ files. This value will take precedence over the value provided with `--seq_platform`.                                                                                                                                                                                                                                                                                | ❌                |
 | `seq_center`       | The sequencing center in which the data in the FASTQ files was sequenced. This value will take precedence over the value provided with `--seq_center`.                                                                                                                                                                                                                                                                                        | ❌                |
 
-✅ = Required
-❌ = Not required
-❓ = One of these columns should be provided
+- ✅ = Required
+- ❌ = Not required
+- ❓ = One of these columns should be provided
 
 ### Preparing BAM/CRAM/junctions/splice_junctions
 
@@ -198,7 +198,7 @@ The pipeline will still work when another command has been used, but it is possi
 
 ### Starting commands
 
-The pipeline can either be run using all fusion detection tools or by specifying individual tools. Visualisation tools will be run on all fusions detected. To run all tools (`arriba`, `ctatsplicing`, `fusioncatcher`, `starfusion`, `stringtie`, `fusionreport`, `fastp`, `salmon`, `fusioninspector`) use the `all` option for the `--tools` parameter:
+The pipeline can either be run using all tools or by specifying individual tools. Visualisation tools will be run on all fusions detected. To run all tools (`arriba`, `ctatsplicing`, `fusioncatcher`, `starfusion`, `stringtie`, `fusionreport`, `fastp`, `salmon`, `fusioninspector`) use the `all` option for the `--tools` parameter:
 
 ```bash
 nextflow run nf-core/rnafusion \
@@ -224,7 +224,7 @@ If you are not covered by the research COSMIC license and want to avoid using CO
 
 > **IMPORTANT: `--tools`** is necessary to run detection tools
 
-`--genomes_base` should be the path to the directory containing the folder `references/` that was built with `--references_only`.
+`--genomes_base` should be the path to the directory containing the references that were [downloaded or built](#download-and-build-references).
 
 Note that the pipeline will create the following files in your working directory:
 
@@ -258,16 +258,15 @@ outdir: './results/'
 
 You can also generate such `YAML`/`JSON` files via [nf-core/launch](https://nf-co.re/launch).
 
-:::warning
-Conda is not currently supported.
-Supported genome is currently only GRCh38.
-:::
+> [!WARNING]
+> Conda is not currently supported.
+> Supported genome is currently only GRCh38.
 
 ### Options
 
 #### Trimming
 
-When the flag `fastp` tool is used in `--tools`, `fastp` is used to provide all tools with trimmed reads. Quality and adapter trimming by default. In addition, tail trimming and adapter_fastq specification are possible. Example usage:
+When the flag `fastp` tool is used in `--tools`, `fastp` is used to provide all tools with trimmed reads. Quality and adapter trimming are performed by default. In addition, tail trimming for fusioncatcher and adapter fasta specification are possible. Example usage:
 
 ```bash
 nextflow run nf-core/rnafusion \
@@ -277,11 +276,11 @@ nextflow run nf-core/rnafusion \
 --genomes_base <PATH/TO/REFERENCES> \
 --outdir <OUTPUT/PATH> \
 --fastp_trim \
---trim_tail <INTEGER> (optional) \
---adapter_fastq <PATH/TO/ADAPTER/FASTQ> (optional)
+--trim_tail_fusioncatcher <INTEGER> (optional) \
+--adapter_fasta <PATH/TO/ADAPTER/FASTA> (optional)
 ```
 
-The additional `--trim_tail_fusioncatcher` flag will toggle an additional `fastp` process, especially useful is reads are above 100 bp, which is not handled well by FusionCatcher. The parameter `--trim_tail_fusioncatcher`need to be provided with the number of bases to remove from the tail end.
+The additional `--trim_tail_fusioncatcher` flag will toggle an additional `fastp` process, especially useful is reads are above 100 bp, which is not handled well by FusionCatcher. The parameter `--trim_tail_fusioncatcher` needs to be provided with the number of bases to remove from the tail end.
 
 #### Filter fusions detected by 2 or more tools
 
@@ -378,10 +377,9 @@ There are two parameters to increase the `--limitSjdbInsertNsj` parameter if nec
 - `--fusioncatcher_limitSjdbInsertNsj`, default: 2000000
 - `--fusioninspector_limitSjdbInsertNsj`, default: 1000000
 
-Use the parameter `--cram` to compress the BAM files to CRAM for specific tools. Options: arriba, starfusion. Leave no space between options:
+#### CRAM compression
 
-- `--cram arriba,starfusion`, default: []
-- `--cram arriba`
+Use the parameter `--cram` to compress the BAM files to CRAM.
 
 ### Troubleshooting
 
@@ -398,7 +396,7 @@ As the error message suggests, it is a STAR-related error and your best luck in 
 
 ### Updating the pipeline
 
-When you run the above command, Nextflow automatically pulls the pipeline code from GitHub and stores it as a cached version. When running the pipeline after this, it will always use the cached version if available - even if the pipeline has been updated since. To make sure that you're running the latest version of the pipeline, make sure that you regularly update the cached version of the pipeline:
+When you run the command below, Nextflow automatically pulls the pipeline code from GitHub and stores it as a cached version. When running the pipeline after this, it will always use the cached version if available - even if the pipeline has been updated since. To make sure that you're running the latest version of the pipeline, make sure that you regularly update the cached version of the pipeline:
 
 ```bash
 nextflow pull nf-core/rnafusion
