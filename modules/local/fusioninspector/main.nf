@@ -60,7 +60,7 @@ process FUSIONINSPECTOR {
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
     touch FusionInspector.log
-    touch ${prefix}.FusionInspector.fusions.abridged.tsv
+    echo "this is a stub run" > ${prefix}.FusionInspector.fusions.abridged.tsv
     touch ${prefix}.FusionInspector.fusions.tsv
     touch ${prefix}.fusion_inspector_web.html
     mkdir -p chckpts_dir
