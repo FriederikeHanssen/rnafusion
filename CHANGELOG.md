@@ -89,6 +89,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update logo [#715](https://github.com/nf-core/rnafusion/pull/715)
 - Replaced local `STARFUSION_BUILD` for module from nf-core [#709](https://github.com/nf-core/rnafusion/pull/709)
 - Modified `test_build` profile to use a reduced version of Pfam and Dfam files [#733](https://github.com/nf-core/rnafusion/pull/733)
+- Updated the documentation to reflect the changes done in the release [#741](https://github.com/nf-core/rnafusion/pull/741)
 
 ### Fixed
 
