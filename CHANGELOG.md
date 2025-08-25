@@ -48,6 +48,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added a extra trimming step for fusioncatcher in case a different read-length is wished for this tool only [#674](https://github.com/nf-core/rnafusion/pull/674)
 - Added support for references hosted on the nf-core AWS S3 bucket. [#717](https://github.com/nf-core/rnafusion/pull/717)
 - Added `--dfam_hmm`, `--dfam_h3f`, `--dfam_h3i`, `--dfam_h3m`, `--dfam_h3p`, `--pfam_file` and `--annot_filter_url` parameters to allow use of custom files in `STARFUSION_BUILD` module [#709](https://github.com/nf-core/rnafusion/pull/709)
+- Add nf-test to local module: `VCF_COLLECT`. [#745](https://github.com/nf-core/rnafusion/pull/745)
 
 ### Changed
 
@@ -89,6 +90,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update logo [#715](https://github.com/nf-core/rnafusion/pull/715)
 - Replaced local `STARFUSION_BUILD` for module from nf-core [#709](https://github.com/nf-core/rnafusion/pull/709)
 - Modified `test_build` profile to use a reduced version of Pfam and Dfam files [#733](https://github.com/nf-core/rnafusion/pull/733)
+- Changed local `ARRIBA_VISUALIZATION`, `CTATSPLICING_STARTOCANCERINTRONS`, `CTATSPLICING_PREPGENOMELIB`, `FUSIONINSPECTOR`, `STARFUSION_DETECT` for its nf-core module versions [#740](https://github.com/nf-core/rnafusion/pull/740)
 
 ### Fixed
 
@@ -112,6 +114,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix behavior when no fusion is present (log a warning and avoid running depending processes)[#714](https://github.com/nf-core/rnafusion/pull/714)
 - Fix CTAT-SPLICING output when no cancer introns were found [#722](https://github.com/nf-core/rnafusion/pull/722)
 - Update VCF_COLLECT script to adapt to transcript_version not being an entry in fusioninspector gtf anymore [#726](https://github.com/nf-core/rnafusion/pull/726)
+- Fix rRNA detection and make it more customizable with nf-core modules [#736](https://github.com/nf-core/rnafusion/pull/736)
+- Fix rRNA detection in GTF using `transcript_type` [#749](https://github.com/nf-core/rnafusion/pull/749)
 
 ### Removed
 
@@ -123,6 +127,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Removed subworkflow with less than two modules: `STARFUSION_WORKFLOW` [#707](https://github.com/nf-core/rnafusion/pull/707)
 - Removed subworkflow with less than two modules: `CTATSPLICING_WORKFLOW` [#704](https://github.com/nf-core/rnafusion/pull/704)
 - Removed subworkflow with less than two modules: `FUSIONREPORT_WORKFLOW` [#721](https://github.com/nf-core/rnafusion/pull/721)
+- Removed local module `GET_RRNA_TRANSCRIPTS` [#736](https://github.com/nf-core/rnafusion/pull/736)
 
 ### Parameters
 
