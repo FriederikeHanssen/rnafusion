@@ -507,18 +507,12 @@
     },
     "stub test fusioninspector": {
         "content": [
-            24,
+            21,
             {
                 "AGAT_CONVERTGFF2BED": {
                     "agat": "v1.5.1"
                 },
-                "AGAT_CONVERTSPGFF2TSV": {
-                    "agat": "v1.4.1"
-                },
                 "ARRIBA_ARRIBA": {
-                    "arriba": "2.5.0"
-                },
-                "ARRIBA_VISUALISATION": {
                     "arriba": "2.5.0"
                 },
                 "BIOAWK": {
@@ -582,10 +576,6 @@
                     "samtools": 1.21,
                     "gawk": "5.1.0"
                 },
-                "VCF_COLLECT": {
-                    "python": "3.11.0",
-                    "vcf_collect": 0.1
-                },
                 "Workflow": {
                     "nf-core/rnafusion": "v4.0.0dev"
                 }
@@ -593,12 +583,9 @@
             [
                 "agat",
                 "agat/Homo_sapiens.GRCh38.46.gtf.bed",
-                "agat/test.tsv",
                 "arriba",
                 "arriba/test.arriba.fusions.discarded.tsv",
                 "arriba/test.arriba.fusions.tsv",
-                "arriba_visualisation",
-                "arriba_visualisation/test_combined_fusions_arriba_visualisation.pdf",
                 "bioawk",
                 "bioawk/Homo_sapiens.GRCh38.46.gtf_rrna.gtf.gz",
                 "fastqc",
@@ -768,16 +755,14 @@
                 "star/test.toTranscriptome.out.bam",
                 "star/test.unmapped_1.fastq.gz",
                 "star/test.unmapped_2.fastq.gz",
-                "star/testXd.out.bam",
-                "vcf",
-                "vcf/test_fusion_data.vcf"
+                "star/testXd.out.bam"
             ]
         ],
         "meta": {
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-08-18T16:16:11.496999226"
+        "timestamp": "2025-08-26T12:27:13.997309"
     },
     "stub test salmon": {
         "content": [
@@ -1600,18 +1585,12 @@
     },
     "stub test all": {
         "content": [
-            35,
+            32,
             {
                 "AGAT_CONVERTGFF2BED": {
                     "agat": "v1.5.1"
                 },
-                "AGAT_CONVERTSPGFF2TSV": {
-                    "agat": "v1.4.1"
-                },
                 "ARRIBA_ARRIBA": {
-                    "arriba": "2.5.0"
-                },
-                "ARRIBA_VISUALISATION": {
                     "arriba": "2.5.0"
                 },
                 "BIOAWK": {
@@ -1708,10 +1687,6 @@
                 "STRINGTIE_STRINGTIE": {
                     "stringtie": "2.2.3"
                 },
-                "VCF_COLLECT": {
-                    "python": "3.11.0",
-                    "vcf_collect": 0.1
-                },
                 "Workflow": {
                     "nf-core/rnafusion": "v4.0.0dev"
                 }
@@ -1719,12 +1694,9 @@
             [
                 "agat",
                 "agat/Homo_sapiens.GRCh38.46.gtf.bed",
-                "agat/test.tsv",
                 "arriba",
                 "arriba/test.arriba.fusions.discarded.tsv",
                 "arriba/test.arriba.fusions.tsv",
-                "arriba_visualisation",
-                "arriba_visualisation/test_combined_fusions_arriba_visualisation.pdf",
                 "bioawk",
                 "bioawk/Homo_sapiens.GRCh38.46.gtf_rrna.gtf.gz",
                 "ctatsplicing",
@@ -1956,15 +1928,13 @@
                 "stringtie/test.ballgown",
                 "stringtie/test.coverage.gtf",
                 "stringtie/test.gene.abundance.txt",
-                "stringtie/test.transcripts.gtf",
-                "vcf",
-                "vcf/test_fusion_data.vcf"
+                "stringtie/test.transcripts.gtf"
             ]
         ],
         "meta": {
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-08-18T16:02:59.744224309"
+        "timestamp": "2025-08-25T16:52:54.430967"
     }
 }
