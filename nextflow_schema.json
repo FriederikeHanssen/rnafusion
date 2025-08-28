@@ -135,11 +135,6 @@
                     "fa_icon": "far fa-file-code",
                     "description": "Path to arriba output"
                 },
-                "download_refs": {
-                    "type": "boolean",
-                    "fa_icon": "far fa-file-code",
-                    "description": "Download references instead of building them (for fusioncatcher and starfusion)"
-                },
                 "fusioncatcher_fusions": {
                     "type": "string",
                     "format": "file-path",
