@@ -92,6 +92,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Replaced local `STARFUSION_BUILD` for module from nf-core [#709](https://github.com/nf-core/rnafusion/pull/709)
 - Modified `test_build` profile to use a reduced version of Pfam and Dfam files [#733](https://github.com/nf-core/rnafusion/pull/733)
 - Changed local `ARRIBA_VISUALIZATION`, `CTATSPLICING_STARTOCANCERINTRONS`, `CTATSPLICING_PREPGENOMELIB`, `FUSIONINSPECTOR`, `STARFUSION_DETECT` for its nf-core module versions [#740](https://github.com/nf-core/rnafusion/pull/740)
+- Replaced local subworkflow `TRIM_WORKFLOW` for its nf-core subworkflow equivalent `FASTQ_FASTQC_UMITOOLS_FASTP` [#752](https://github.com/nf-core/rnafusion/pull/752)
+- Changed local `FASTQ_ALIGN_STAR` for subworkflow from nf-core [#756](https://github.com/nf-core/rnafusion/pull/756)
 
 ### Fixed
 
@@ -116,6 +118,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update VCF_COLLECT script to adapt to transcript_version not being an entry in fusioninspector gtf anymore [#726](https://github.com/nf-core/rnafusion/pull/726)
 - Fix rRNA detection and make it more customizable with nf-core modules [#736](https://github.com/nf-core/rnafusion/pull/736)
 - Fix rRNA detection in GTF using `transcript_type` [#749](https://github.com/nf-core/rnafusion/pull/749)
+- Fixed nf-test for `QC_WORKFLOW` subworkflow [#756](https://github.com/nf-core/rnafusion/pull/756)
 
 ### Removed
 
@@ -128,6 +131,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Removed subworkflow with less than two modules: `CTATSPLICING_WORKFLOW` [#704](https://github.com/nf-core/rnafusion/pull/704)
 - Removed subworkflow with less than two modules: `FUSIONREPORT_WORKFLOW` [#721](https://github.com/nf-core/rnafusion/pull/721)
 - Removed local module `GET_RRNA_TRANSCRIPTS` [#736](https://github.com/nf-core/rnafusion/pull/736)
+- Removed old unused parameters `params.download_refs` and `params.fusioncatcher_download_link` [#752](https://github.com/nf-core/rnafusion/pull/752)
 
 ### Parameters
 
@@ -142,6 +146,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | `--stringtie`         | `--tools stringtie`             |
 | `--all`               | `--tools all`                   |
 |                       | `--fusioncatcher_download_link` |
+|                       | `--trim_tail_fusioncatcher`     |
+|                       | `--save_trimmed_fail`           |
+|                       | `--save_merged`                 |
+|                       | `--min_trimmed_reads`           |
 |                       | `--trim_tail_fusioncatcher`     |
 
 ## v3.0.2 - [2024-04-10]
