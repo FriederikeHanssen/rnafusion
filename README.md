@@ -71,6 +71,7 @@ The pipeline is also able to build the references in case files from a specific 
 10. Merge all fusions detected by the selected tools with [Fusion-report](https://github.com/Clinical-Genomics/fusion-report)
 11. Post-processing and analysis of data
     - [FusionInspector](https://github.com/FusionInspector/FusionInspector)
+    - Summarize information into a VCF file
     - [Arriba](https://github.com/suhrig/arriba) visualisation
     - Collect metrics ([`picard CollectRnaSeqMetrics`](https://gatk.broadinstitute.org/hc/en-us/articles/360037057492-CollectRnaSeqMetrics-Picard-)), [`picard CollectInsertSizeMetrics`](https://gatk.broadinstitute.org/hc/en-us/articles/360037055772-CollectInsertSizeMetrics-Picard-) and ([`GATK MarkDuplicates`](https://gatk.broadinstitute.org/hc/en-us/articles/360037052812-MarkDuplicates-Picard-))
 12. Present QC for raw reads ([`MultiQC`](http://multiqc.info/))
