@@ -399,4 +399,3 @@ Vcf-collect takes as input the results of fusion-report and fusioninspector. Tha
 
 </details>
 
-[Megafusion](https://github.com/J35P312/MegaFusion) converts RNA fusion files to SV VCF and collects statistics and metrics in a VCF file.
