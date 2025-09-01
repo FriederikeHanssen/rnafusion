@@ -158,7 +158,9 @@ If `--tools ctatsplicing` is present, [CTAT-SPLICING](https://github.com/Trinity
 
 ### Fastp
 
-If `--tools fastp` is present, [fastp](https://github.com/OpenGene/fastp) will filter low quality reads as well as bases at the 5' and 3' ends, trim adapters (automatically detected, but input with parameter `--adapter_fasta` is possible). 3' trimming is also possible via parameter `--trim_tail_fusioncatcher`.
+If `--tools fastp` is present, [fastp](https://github.com/OpenGene/fastp) will filter low quality reads as well as bases at the 5' and 3' ends, trim adapters (automatically detected, but input with parameter `--adapter_fasta` is possible). 3' trimming is also possible via parameter `--trim_tail`.
+
+As fusioncatcher is especially sensitive to read length, 100 bp being the recommended length, an additional parameter `--trim_tail_fusioncatcher` triggers an extra fastp process with 3' trimming of the length given, these triggered reads are then fed to fusioncatcher but the non-extra trimmed ones are still used for arriba and STAR-Fusion.
 
 <details markdown="1">
 <summary>Output files</summary>
