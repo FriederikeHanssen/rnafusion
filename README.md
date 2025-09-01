@@ -54,7 +54,7 @@ The pipeline is also able to build the references in case files from a specific 
 8. Download [Fusion-report](https://github.com/Clinical-Genomics/fusion-report) DBs
 
 > [!WARNING]
-> References for Fusioncatcher and Arriba cannot be automatically created by the pipeline and should be downloaded from the S3 bucket or another source.
+> References for Fusioncatcher and Arriba cannot be automatically created by the pipeline and should be downloaded from the S3 bucket or another source. See the [References](#references) section for more information.
 
 #### Main workflow
 

@@ -10,7 +10,7 @@ The pipeline is divided into two parts:
 
 1. Download and build references
 
-- Download the references from the S3 bucket (recommended) or build them with the pipeline
+- [Download](#download-and-build-references) the references from the S3 bucket (recommended) or build them with the pipeline
 - **Important**: has to be done with each new release
 
 2. Running the analysis
