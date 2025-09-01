@@ -1,8 +1,8 @@
-include { AGAT_CONVERTSPGFF2TSV     }                     from '../../modules/nf-core/agat/convertspgff2tsv/main'
-include { ARRIBA_VISUALISATION     }                      from '../../modules/nf-core/arriba/visualisation/main'
-include { CAT_CAT }                                       from '../../modules/nf-core/cat/cat/main'
-include { VCF_COLLECT }                                   from '../../modules/local/vcf_collect/main'
-include { FUSIONINSPECTOR     }                           from '../../modules/nf-core/fusioninspector/main'
+include { AGAT_CONVERTSPGFF2TSV     }                     from '../../../modules/nf-core/agat/convertspgff2tsv/main'
+include { ARRIBA_VISUALISATION     }                      from '../../../modules/nf-core/arriba/visualisation/main'
+include { CAT_CAT }                                       from '../../../modules/nf-core/cat/cat/main'
+include { VCF_COLLECT }                                   from '../../../modules/local/vcf_collect/main'
+include { FUSIONINSPECTOR     }                           from '../../../modules/nf-core/fusioninspector/main'
 
 workflow FUSIONINSPECTOR_WORKFLOW {
     take:
@@ -20,15 +20,17 @@ workflow FUSIONINSPECTOR_WORKFLOW {
         ch_starfusion_ref
         skip_vis
         skip_vcf
+        tools_cutoff
+        whitelist
 
     main:
         ch_versions = Channel.empty()
         ch_arriba_visualisation = Channel.empty()
 
-        ch_fusion_list = ( params.tools_cutoff > 1 ? fusion_list_filtered : fusion_list )
+        ch_fusion_list = ( tools_cutoff > 1 ? fusion_list_filtered : fusion_list )
 
-        if (params.whitelist)  {
-            ch_whitelist = ch_fusion_list.combine(Channel.value(file(params.whitelist, checkIfExists:true)))
+        if (whitelist)  {
+            ch_whitelist = ch_fusion_list.combine(Channel.value(file(whitelist, checkIfExists:true)))
                             .map { meta, fusions, whitelist -> [ meta, [fusions, whitelist] ] }
 
             CAT_CAT(ch_whitelist) // fusioninspector takes care of possible duplicates
@@ -44,19 +46,15 @@ workflow FUSIONINSPECTOR_WORKFLOW {
 
         def tsv_nonempty = FUSIONINSPECTOR.out.tsv.filter { _meta, file -> file.exists() && file.size() > 0 }
         def tsv_abridged_nonempty = FUSIONINSPECTOR.out.abridged_tsv.filter { _meta, file -> file.exists() && file.size() > 0 }
-
         def gtf_nonempty = FUSIONINSPECTOR.out.out_gtf.filter { _meta, file -> file.exists() && file.size() > 0 }
 
         if (
-            !skip_vcf &&
-            tsv_nonempty &&
-            tsv_abridged_nonempty &&
-            gtf_nonempty
+            !skip_vcf
         ) {
             AGAT_CONVERTSPGFF2TSV(gtf_nonempty)
             ch_versions = ch_versions.mix(AGAT_CONVERTSPGFF2TSV.out.versions)
 
-            fusion_data = tsv_abridged_nonempty.join(AGAT_CONVERTSPGFF2TSV.out.tsv).join(fusionreport_out).join(fusionreport_csv)
+            fusion_data = tsv_abridged_nonempty.combine(AGAT_CONVERTSPGFF2TSV.out.tsv, fusionreport_out, fusionreport_csv).ifEmpty { Channel.empty() }
 
             VCF_COLLECT(fusion_data, ch_hgnc_ref, ch_hgnc_date)
             ch_versions = ch_versions.mix(VCF_COLLECT.out.versions)

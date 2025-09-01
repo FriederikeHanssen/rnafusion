@@ -27,8 +27,9 @@ nextflow_workflow {
                 }
             }
 
+            // Filter GTF to extract rRNA genes
             run("BIOAWK") {
-                script "../../../../modules/nf-core/bioawk/main"
+                script "../../../../modules/nf-core/bioawk/main.nf"
                 process {
                     """
                     input[0] = Channel.of(
@@ -42,7 +43,7 @@ nextflow_workflow {
             }
 
             run("AGAT_CONVERTGFF2BED") {
-                script "../../../../modules/nf-core/agat/convertgff2bed/main"
+                script "../../../../modules/nf-core/agat/convertgff2bed/main.nf"
                 process {
                     """
                     input[0] = BIOAWK.out.output

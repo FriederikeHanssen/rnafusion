@@ -6,7 +6,7 @@
 
 include { BUILD_REFERENCES              }   from '../subworkflows/local/build_references'
 include { CAT_FASTQ                     }   from '../modules/nf-core/cat/fastq/main'
-include { TRIM_WORKFLOW                 }   from '../subworkflows/local/trim_workflow/main'
+include { FASTQ_FASTQC_UMITOOLS_FASTP   }   from '../subworkflows/nf-core/fastq_fastqc_umitools_fastp/main'
 include { QC_WORKFLOW                   }   from '../subworkflows/local/qc_workflow'
 include { STARFUSION_DETECT             }   from '../modules/nf-core/starfusion/detect/main'
 include { STRINGTIE_WORKFLOW            }   from '../subworkflows/local/stringtie_workflow/main'
@@ -18,8 +18,9 @@ include { MULTIQC                       }   from '../modules/nf-core/multiqc/mai
 include { STAR_ALIGN                    }   from '../modules/nf-core/star/align/main'
 include { SALMON_QUANT                  }   from '../modules/nf-core/salmon/quant/main'
 include { SAMTOOLS_CONVERT              }   from '../modules/nf-core/samtools/convert/main'
+include { SAMTOOLS_INDEX                }   from '../modules/nf-core/samtools/index/main'
 include { paramsSummaryMap              }   from 'plugin/nf-schema'
-include { FASTQ_ALIGN_STAR              }   from '../subworkflows/local/fastq_align_star'
+include { FASTQ_ALIGN_STAR              }   from '../subworkflows/nf-core/fastq_align_star'
 include { paramsSummaryMultiqc          }   from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { softwareVersionsToYAML        }   from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { methodsDescriptionText        }   from '../subworkflows/local/utils_nfcore_rnafusion_pipeline'
@@ -115,37 +116,51 @@ workflow RNAFUSION {
         }
 
         //
-        // QC from FASTQ files
-        //
-
-        if(!params.skip_qc) {
-            FASTQC (
-                ch_fastqs_to_process.found,
-            )
-            ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip.collect{it[1]})
-            ch_versions = ch_versions.mix(FASTQC.out.versions)
-        }
-
-        //
-        // SUBWORKFLOW: Trimming
+        // SUBWORKFLOW: Read QC and trimming (nf-core)
         //
 
         def ch_reads = Channel.empty()
-        if(tools.contains("fastp")) {
-            def ch_adapter_fasta = params.adapter_fasta ? Channel.fromPath(params.adapter_fasta).collect() : []
-            TRIM_WORKFLOW (
-                ch_fastqs_to_process.found,
-                ch_adapter_fasta,
-                params.skip_qc
-            )
-            ch_reads = TRIM_WORKFLOW.out.ch_reads_all
-            ch_versions      = ch_versions.mix(TRIM_WORKFLOW.out.versions)
-            ch_multiqc_files = ch_multiqc_files.mix(TRIM_WORKFLOW.out.ch_fastp_html.collect{it[1]})
-            ch_multiqc_files = ch_multiqc_files.mix(TRIM_WORKFLOW.out.ch_fastp_json.collect{it[1]})
-            ch_multiqc_files = ch_multiqc_files.mix(TRIM_WORKFLOW.out.ch_fastqc_trimmed.collect{it[1]})
-        } else {
-            ch_reads = ch_fastqs_to_process.found
-        }
+
+        // adapter_fasta as a channel (or empty if not provided)
+        def ch_adapter_fasta = params.adapter_fasta ? Channel.fromPath(params.adapter_fasta).collect() : []
+
+        // disable umi usage in this subworkflow for this pipeline
+        def with_umi         = false
+        def skip_umi_extract = false
+        def umi_discard_read = 0
+
+        // if 'fastp' isn't selected, we still run the subworkflow but skip trimming
+        def skip_trimming    = (!tools.contains("fastp"))
+
+        // optional fastp output controls + minimum reads after trimming
+        def save_trimmed_fail = params.save_trimmed_fail ?: false
+        def save_merged       = params.save_merged ?: false
+        def min_trimmed_reads = (params.min_trimmed_reads ?: 1) as Integer
+
+        FASTQ_FASTQC_UMITOOLS_FASTP(
+            ch_fastqs_to_process.found,  // reads: [ val(meta), [fastqs] ]
+            params.skip_qc,              // skip_fastqc
+            with_umi,                    // with_umi
+            skip_umi_extract,            // skip_umi_extract
+            umi_discard_read,            // umi_discard_read (0,1,2)
+            skip_trimming,               // skip_trimming
+            ch_adapter_fasta,            // adapter_fasta
+            save_trimmed_fail,           // save_trimmed_fail
+            save_merged,                 // save_merged
+            min_trimmed_reads            // min_trimmed_reads
+        )
+
+        ch_reads    = FASTQ_FASTQC_UMITOOLS_FASTP.out.reads
+        ch_versions = ch_versions.mix(FASTQ_FASTQC_UMITOOLS_FASTP.out.versions)
+
+        ch_sbwf_fastp_mqc = Channel.empty()
+            .mix(FASTQ_FASTQC_UMITOOLS_FASTP.out.fastqc_raw_zip.map { it[1] })
+            .mix(FASTQ_FASTQC_UMITOOLS_FASTP.out.fastqc_trim_zip.map { it[1] })
+            .mix(FASTQ_FASTQC_UMITOOLS_FASTP.out.trim_html.map { it[1] })
+            .mix(FASTQ_FASTQC_UMITOOLS_FASTP.out.trim_json.map { it[1] })
+            .ifEmpty([])
+
+        ch_multiqc_files = ch_multiqc_files.mix(ch_sbwf_fastp_mqc)
 
         //
         // MODULE: SALMON_QUANT
@@ -181,13 +196,17 @@ workflow RNAFUSION {
                 ch_fastqs_to_align,
                 BUILD_REFERENCES.out.starindex_ref,
                 BUILD_REFERENCES.out.gtf,
-                BUILD_REFERENCES.out.fasta,
-                BUILD_REFERENCES.out.fai,
                 params.star_ignore_sjdbgtf,
-                params.cram
+                ch_fastqs_to_align.map { meta, _fastqs -> meta.seq_platform },
+                ch_fastqs_to_align.map { meta, _fastqs -> meta.seq_center },
+                BUILD_REFERENCES.out.fasta,
+                [[:], []]
             )
+            SAMTOOLS_INDEX(FASTQ_ALIGN_STAR.out.bam_sorted_aligned)
+            ch_bam_bai = FASTQ_ALIGN_STAR.out.bam_sorted_aligned
+                .join(SAMTOOLS_INDEX.out.bai, failOnMismatch:true, failOnDuplicate:true)
             ch_versions             = ch_versions.mix(FASTQ_ALIGN_STAR.out.versions)
-            ch_aligned_reads        = ch_aligned_reads.mix(FASTQ_ALIGN_STAR.out.bam_bai)
+            ch_aligned_reads        = ch_aligned_reads.mix(ch_bam_bai)
             ch_star_junctions       = ch_star_junctions.mix(FASTQ_ALIGN_STAR.out.junctions)
             ch_star_splice_junctions = ch_star_splice_junctions.mix(FASTQ_ALIGN_STAR.out.spl_junc_tabs)
             ch_multiqc_files        = ch_multiqc_files.mix(FASTQ_ALIGN_STAR.out.log_final.collect{it[1]}.ifEmpty([]))
@@ -357,7 +376,9 @@ workflow RNAFUSION {
                 BUILD_REFERENCES.out.hgnc_date,
                 BUILD_REFERENCES.out.starfusion_ref,
                 params.skip_vis,
-                params.skip_vcf
+                params.skip_vcf,
+                params.tools_cutoff,
+                params.whitelist
             )
             ch_versions      = ch_versions.mix(FUSIONINSPECTOR_WORKFLOW.out.versions)
             ch_multiqc_files = ch_multiqc_files.mix(FUSIONINSPECTOR_WORKFLOW.out.ch_arriba_visualisation.collect{it[1]}.ifEmpty([]))
