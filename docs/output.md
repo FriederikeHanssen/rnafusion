@@ -95,7 +95,7 @@ If no parameters are specified, the default is applied.
 
 ### Agat
 
-[Arriba](https://github.com/NBISweden/AGAT) is to convert the GFF file to a TSV file, which is then used in the VCF creation.
+[Agat](https://github.com/NBISweden/AGAT) is to convert the GFF file to a TSV file, which is then used in the VCF creation.
 
 <details markdown="1">
 <summary>Output files</summary>
