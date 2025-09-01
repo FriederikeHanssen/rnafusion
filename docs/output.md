@@ -36,11 +36,17 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
 
 - `<genomes_base>/`
   - `<genome>/`
-    - `fusion_report_db`
+    - `arriba/`
+      - `blacklist_hg38_GRCh38_v<gencode_version>.tsv.gz`
+      - `cytobands_hg38_GRCh38_v<gencode_version>.tsv`
+      - `known_fusions_hg38_GRCh38_v<gencode_version>.tsv.gz`
+      - `protein_domains_hg38_GRCh38_v<gencode_version>.gff3`
+    - `fusion_report_db/`
       - `cosmic.db`
       - `fusiongdb2.db`
       - `mitelman.db`
     - `gencode_v<gencode_version>/`
+      - `fusioncatcher/`
       - `gencode/`
         - `Homo_sapiens.GRCh38.<gencode_version>.all.fa`
         - `Homo_sapiens.GRCh38.<gencode_version>.cdna.all.fa.gz`
@@ -78,8 +84,6 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
 ├── fusioncatcher
 ├── fusioninspector
 ├── fusionreport
-├── gatk4
-├── get
 ├── multiqc
 ├── picard
 ├── pipeline_info
