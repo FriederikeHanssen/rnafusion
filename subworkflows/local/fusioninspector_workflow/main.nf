@@ -59,7 +59,6 @@ workflow FUSIONINSPECTOR_WORKFLOW {
                 .combine(AGAT_CONVERTSPGFF2TSV.out.tsv)
                 .combine(fusionreport_out)
                 .combine(fusionreport_csv)
-                .ifEmpty{ Channel.empty() }
 
             VCF_COLLECT(fusion_data, ch_hgnc_ref, ch_hgnc_date)
             ch_versions = ch_versions.mix(VCF_COLLECT.out.versions)
