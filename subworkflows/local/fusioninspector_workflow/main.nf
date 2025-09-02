@@ -54,7 +54,7 @@ workflow FUSIONINSPECTOR_WORKFLOW {
             AGAT_CONVERTSPGFF2TSV(gtf_nonempty)
             ch_versions = ch_versions.mix(AGAT_CONVERTSPGFF2TSV.out.versions)
 
-            fusion_data = tsv_abridged_nonempty.combine(AGAT_CONVERTSPGFF2TSV.out.tsv, fusionreport_out, fusionreport_csv).ifEmpty { Channel.empty() }
+            fusion_data = tsv_abridged_nonempty.combine(AGAT_CONVERTSPGFF2TSV.out.tsv, fusionreport_out, fusionreport_csv)
             fusion_data = tsv_abridged_nonempty
                 .combine(AGAT_CONVERTSPGFF2TSV.out.tsv)
                 .combine(fusionreport_out)
