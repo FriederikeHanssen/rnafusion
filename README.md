@@ -64,18 +64,18 @@ The pipeline is also able to build the references in case files from a specific 
 4. Align FASTQs to BAM with [STAR](https://github.com/alexdobin/STAR)
 5. Run fusion detection with [Arriba](https://github.com/suhrig/arriba)
 6. Run fusion detection with [STAR-Fusion](https://github.com/STAR-Fusion/STAR-Fusion)
-7a. Optional trimming of 3' end with [fastp](https://github.com/OpenGene/fastp) to feed into fusioncatcher (other tools not affected)
-7b. Run fusion detection with [FusionCatcher](https://github.com/ndaniel/fusioncatcher)
-8. Run transcript assembly and quantification with [StringTie](https://ccb.jhu.edu/software/stringtie/)
-9. Run cancer splicing aberrations detection with [CTAT-SPLICING](https://github.com/TrinityCTAT/CTAT-SPLICING)
-10. Merge all fusions detected by the selected tools with [Fusion-report](https://github.com/Clinical-Genomics/fusion-report)
-11. Post-processing and analysis of data
+   7a. Optional trimming of 3' end with [fastp](https://github.com/OpenGene/fastp) to feed into fusioncatcher (other tools not affected)
+   7b. Run fusion detection with [FusionCatcher](https://github.com/ndaniel/fusioncatcher)
+7. Run transcript assembly and quantification with [StringTie](https://ccb.jhu.edu/software/stringtie/)
+8. Run cancer splicing aberrations detection with [CTAT-SPLICING](https://github.com/TrinityCTAT/CTAT-SPLICING)
+9. Merge all fusions detected by the selected tools with [Fusion-report](https://github.com/Clinical-Genomics/fusion-report)
+10. Post-processing and analysis of data
     - [FusionInspector](https://github.com/FusionInspector/FusionInspector)
     - Summarize information into a VCF file
     - [Arriba](https://github.com/suhrig/arriba) visualisation
     - Collect metrics ([`picard CollectRnaSeqMetrics`](https://gatk.broadinstitute.org/hc/en-us/articles/360037057492-CollectRnaSeqMetrics-Picard-)), [`picard CollectInsertSizeMetrics`](https://gatk.broadinstitute.org/hc/en-us/articles/360037055772-CollectInsertSizeMetrics-Picard-) and ([`GATK MarkDuplicates`](https://gatk.broadinstitute.org/hc/en-us/articles/360037052812-MarkDuplicates-Picard-))
-12. Present QC for raw reads ([`MultiQC`](http://multiqc.info/))
-13. Compress bam files to cram with [samtools view](http://www.htslib.org/)
+11. Present QC for raw reads ([`MultiQC`](http://multiqc.info/))
+12. Compress bam files to cram with [samtools view](http://www.htslib.org/)
 
 ## Usage
 
