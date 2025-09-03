@@ -25,9 +25,6 @@
                 "GENCODE_DOWNLOAD": {
                     "wget": "1.21.4"
                 },
-                "GTF_TO_REFFLAT": {
-                    "gtfToGenePred": 377
-                },
                 "PICARD_COLLECTINSERTSIZEMETRICS": {
                     "picard": "3.3.0"
                 },
@@ -70,6 +67,9 @@
                     "samtools": 1.21,
                     "gawk": "5.1.0"
                 },
+                "UCSC_GTFTOGENEPRED": {
+                    "ucsc": 447
+                },
                 "Workflow": {
                     "nf-core/rnafusion": "v4.0.0dev"
                 }
@@ -104,6 +104,7 @@
                 "references/GRCh38/gencode_v46",
                 "references/GRCh38/gencode_v46/gencode",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf",
+                "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.genepred",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.interval_list",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.refflat",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa",
@@ -236,7 +237,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-09-02T16:37:02.108394"
+        "timestamp": "2025-09-02T08:22:03.749618742"
     },
     "stub test stringtie": {
         "content": [
@@ -263,9 +264,6 @@
                 },
                 "GENCODE_DOWNLOAD": {
                     "wget": "1.21.4"
-                },
-                "GTF_TO_REFFLAT": {
-                    "gtfToGenePred": 377
                 },
                 "PICARD_COLLECTINSERTSIZEMETRICS": {
                     "picard": "3.3.0"
@@ -307,6 +305,9 @@
                 "STRINGTIE_STRINGTIE": {
                     "stringtie": "2.2.3"
                 },
+                "UCSC_GTFTOGENEPRED": {
+                    "ucsc": 447
+                },
                 "Workflow": {
                     "nf-core/rnafusion": "v4.0.0dev"
                 }
@@ -341,6 +342,7 @@
                 "references/GRCh38/gencode_v46",
                 "references/GRCh38/gencode_v46/gencode",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf",
+                "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.genepred",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.interval_list",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.refflat",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa",
@@ -400,7 +402,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-09-02T16:38:46.627115"
+        "timestamp": "2025-09-02T08:22:39.560551811"
     },
     "stub test arriba": {
         "content": [
@@ -430,9 +432,6 @@
                 },
                 "GENCODE_DOWNLOAD": {
                     "wget": "1.21.4"
-                },
-                "GTF_TO_REFFLAT": {
-                    "gtfToGenePred": 377
                 },
                 "PICARD_COLLECTINSERTSIZEMETRICS": {
                     "picard": "3.3.0"
@@ -467,6 +466,9 @@
                     "star": "2.7.11b",
                     "samtools": 1.21,
                     "gawk": "5.1.0"
+                },
+                "UCSC_GTFTOGENEPRED": {
+                    "ucsc": 447
                 },
                 "Workflow": {
                     "nf-core/rnafusion": "v4.0.0dev"
@@ -505,6 +507,7 @@
                 "references/GRCh38/gencode_v46",
                 "references/GRCh38/gencode_v46/gencode",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf",
+                "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.genepred",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.interval_list",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.refflat",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa",
@@ -557,7 +560,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-09-02T15:55:28.908716"
+        "timestamp": "2025-09-02T08:19:38.026180355"
     },
     "stub test fusioninspector": {
         "content": [
@@ -596,9 +599,6 @@
                 },
                 "GENCODE_DOWNLOAD": {
                     "wget": "1.21.4"
-                },
-                "GTF_TO_REFFLAT": {
-                    "gtfToGenePred": 377
                 },
                 "HGNC_DOWNLOAD": {
                     "wget": "1.21.4"
@@ -641,6 +641,9 @@
                     "star": "2.7.11b",
                     "samtools": 1.21,
                     "gawk": "5.1.0"
+                },
+                "UCSC_GTFTOGENEPRED": {
+                    "ucsc": 447
                 },
                 "Workflow": {
                     "nf-core/rnafusion": "v4.0.0dev"
@@ -703,6 +706,7 @@
                 "references/GRCh38/gencode_v46",
                 "references/GRCh38/gencode_v46/gencode",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf",
+                "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.genepred",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.interval_list",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.refflat",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa",
@@ -861,9 +865,6 @@
                 "GFFREAD": {
                     "gffread": "0.12.7"
                 },
-                "GTF_TO_REFFLAT": {
-                    "gtfToGenePred": 377
-                },
                 "SALMON_INDEX": {
                     "salmon": "1.10.3"
                 },
@@ -872,6 +873,9 @@
                 },
                 "SAMTOOLS_FAIDX": {
                     "samtools": 1.21
+                },
+                "UCSC_GTFTOGENEPRED": {
+                    "ucsc": 447
                 },
                 "Workflow": {
                     "nf-core/rnafusion": "v4.0.0dev"
@@ -899,6 +903,7 @@
                 "references/GRCh38/gencode_v46/gencode",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.fasta",
+                "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.genepred",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.interval_list",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.refflat",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa",
@@ -963,9 +968,6 @@
                 "GENCODE_DOWNLOAD": {
                     "wget": "1.21.4"
                 },
-                "GTF_TO_REFFLAT": {
-                    "gtfToGenePred": 377
-                },
                 "PICARD_COLLECTINSERTSIZEMETRICS": {
                     "picard": "3.3.0"
                 },
@@ -1004,6 +1006,9 @@
                     "star": "2.7.11b",
                     "samtools": 1.21,
                     "gawk": "5.1.0"
+                },
+                "UCSC_GTFTOGENEPRED": {
+                    "ucsc": 447
                 },
                 "Workflow": {
                     "nf-core/rnafusion": "v4.0.0dev"
@@ -1051,6 +1056,7 @@
                 "references/GRCh38/gencode_v46",
                 "references/GRCh38/gencode_v46/gencode",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf",
+                "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.genepred",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.interval_list",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.refflat",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa",
@@ -1224,9 +1230,6 @@
                 "GENCODE_DOWNLOAD": {
                     "wget": "1.21.4"
                 },
-                "GTF_TO_REFFLAT": {
-                    "gtfToGenePred": 377
-                },
                 "PICARD_COLLECTINSERTSIZEMETRICS": {
                     "picard": "3.3.0"
                 },
@@ -1268,6 +1271,9 @@
                     "star": "2.7.11b",
                     "samtools": 1.21,
                     "gawk": "5.1.0"
+                },
+                "UCSC_GTFTOGENEPRED": {
+                    "ucsc": 447
                 },
                 "Workflow": {
                     "nf-core/rnafusion": "v4.0.0dev"
@@ -1324,6 +1330,7 @@
                 "references/GRCh38/gencode_v46",
                 "references/GRCh38/gencode_v46/gencode",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf",
+                "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.genepred",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.interval_list",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.refflat",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa",
@@ -1486,11 +1493,11 @@
                 "GENCODE_DOWNLOAD": {
                     "wget": "1.21.4"
                 },
-                "GTF_TO_REFFLAT": {
-                    "gtfToGenePred": 377
-                },
                 "SAMTOOLS_FAIDX": {
                     "samtools": 1.21
+                },
+                "UCSC_GTFTOGENEPRED": {
+                    "ucsc": 447
                 },
                 "Workflow": {
                     "nf-core/rnafusion": "v4.0.0dev"
@@ -1526,6 +1533,7 @@
                 "references/GRCh38/gencode_v46",
                 "references/GRCh38/gencode_v46/gencode",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf",
+                "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.genepred",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.interval_list",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.refflat",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa",
@@ -1563,11 +1571,11 @@
                 "GENCODE_DOWNLOAD": {
                     "wget": "1.21.4"
                 },
-                "GTF_TO_REFFLAT": {
-                    "gtfToGenePred": 377
-                },
                 "SAMTOOLS_FAIDX": {
                     "samtools": 1.21
+                },
+                "UCSC_GTFTOGENEPRED": {
+                    "ucsc": 447
                 },
                 "Workflow": {
                     "nf-core/rnafusion": "v4.0.0dev"
@@ -1598,6 +1606,7 @@
                 "references/GRCh38/gencode_v46",
                 "references/GRCh38/gencode_v46/gencode",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf",
+                "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.genepred",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.interval_list",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.refflat",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa",
@@ -1638,11 +1647,11 @@
                 "GENCODE_DOWNLOAD": {
                     "wget": "1.21.4"
                 },
-                "GTF_TO_REFFLAT": {
-                    "gtfToGenePred": 377
-                },
                 "SAMTOOLS_FAIDX": {
                     "samtools": 1.21
+                },
+                "UCSC_GTFTOGENEPRED": {
+                    "ucsc": 447
                 },
                 "Workflow": {
                     "nf-core/rnafusion": "v4.0.0dev"
@@ -1679,6 +1688,7 @@
                 "references/GRCh38/gencode_v46",
                 "references/GRCh38/gencode_v46/gencode",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf",
+                "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.genepred",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.interval_list",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.refflat",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa",
@@ -1747,9 +1757,6 @@
                 "GFFREAD": {
                     "gffread": "0.12.7"
                 },
-                "GTF_TO_REFFLAT": {
-                    "gtfToGenePred": 377
-                },
                 "HGNC_DOWNLOAD": {
                     "wget": "1.21.4"
                 },
@@ -1806,6 +1813,9 @@
                 },
                 "STRINGTIE_STRINGTIE": {
                     "stringtie": "2.2.3"
+                },
+                "UCSC_GTFTOGENEPRED": {
+                    "ucsc": 447
                 },
                 "Workflow": {
                     "nf-core/rnafusion": "v4.0.0dev"
@@ -1894,6 +1904,7 @@
                 "references/GRCh38/gencode_v46/gencode",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.fasta",
+                "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.genepred",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.interval_list",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.refflat",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa",

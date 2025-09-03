@@ -89,11 +89,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Replaced local `FUSIONREPORT` and `FUSIONREPORT_DOWNLOAD` with `FUSIONREPORT_DETECT` and `FUSIONREPORT_DOWNLOAD` from nf-core [#703](https://github.com/nf-core/rnafusion/pull/703)
 - Updated arriba to v2.5.0 [#693](https://github.com/nf-core/rnafusion/pull/693)
 - Update logo [#715](https://github.com/nf-core/rnafusion/pull/715)
+- Slight documentation update [#719](https://github.com/nf-core/rnafusion/pull/719)
 - Replaced local `STARFUSION_BUILD` for module from nf-core [#709](https://github.com/nf-core/rnafusion/pull/709)
 - Modified `test_build` profile to use a reduced version of Pfam and Dfam files [#733](https://github.com/nf-core/rnafusion/pull/733)
+- Updated the documentation to reflect the changes done in this release [#741](https://github.com/nf-core/rnafusion/pull/741)
 - Changed local `ARRIBA_VISUALIZATION`, `CTATSPLICING_STARTOCANCERINTRONS`, `CTATSPLICING_PREPGENOMELIB`, `FUSIONINSPECTOR`, `STARFUSION_DETECT` for its nf-core module versions [#740](https://github.com/nf-core/rnafusion/pull/740)
 - Replaced local subworkflow `TRIM_WORKFLOW` for its nf-core subworkflow equivalent `FASTQ_FASTQC_UMITOOLS_FASTP` [#752](https://github.com/nf-core/rnafusion/pull/752)
 - Changed local `FASTQ_ALIGN_STAR` for subworkflow from nf-core [#756](https://github.com/nf-core/rnafusion/pull/756)
+- Replaced local subworkflow `STRINGTIE_WORKFLOW` for its nf-core version `BAM_STRINGTIE_MERGE` and the local module module `GTF_TO_REFFLAT` for nf-core's `UCSC_GTFTOGENEPRED` [#758](https://github.com/nf-core/rnafusion/pull/758)
 
 ### Fixed
 
