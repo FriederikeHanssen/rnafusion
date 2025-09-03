@@ -39,6 +39,7 @@
                 "input": {
                     "type": "string",
                     "format": "file-path",
+                    "mimetype": "text/csv",
                     "schema": "assets/schema_input.json",
                     "exists": true,
                     "pattern": "^\\S+\\.(csv|yaml|yml|json)$",
@@ -335,16 +336,20 @@
                 },
                 "save_trimmed_fail": {
                     "type": "boolean",
-                    "fa_icon": "far fa-times-circle"
+                    "fa_icon": "far fa-times-circle",
+                    "description": "FASTP: Specify true to save files that failed to pass trimming thresholds"
                 },
                 "min_trimmed_reads": {
                     "type": "integer",
                     "default": 1,
-                    "fa_icon": "fas fa-search-minus"
+                    "fa_icon": "fas fa-search-minus",
+                    "description": "FASTP: Inputs with fewer than this reads will be filtered out of the \"reads\" output channel"
+
                 },
                 "save_merged": {
                     "type": "boolean",
-                    "fa_icon": "fas fa-download"
+                    "fa_icon": "fas fa-download",
+                    "description": "FASTP: Specify true to save merged reads"
                 }
             }
         },
