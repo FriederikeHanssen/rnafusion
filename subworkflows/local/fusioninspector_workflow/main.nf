@@ -31,7 +31,7 @@ workflow FUSIONINSPECTOR_WORKFLOW {
 
         if (whitelist)  {
             ch_whitelist = ch_fusion_list.combine(Channel.value(file(whitelist, checkIfExists:true)))
-                            .map { meta, fusions, whitelist -> [ meta, [fusions, whitelist] ] }
+                            .map { meta, fusions, whitelist_file -> [ meta, [fusions, whitelist_file] ] }
 
             CAT_CAT(ch_whitelist) // fusioninspector takes care of possible duplicates
             ch_versions = ch_versions.mix(CAT_CAT.out.versions)
