@@ -55,9 +55,9 @@ workflow FUSIONINSPECTOR_WORKFLOW {
             ch_versions = ch_versions.mix(AGAT_CONVERTSPGFF2TSV.out.versions)
 
             fusion_data = tsv_abridged_nonempty
-                .combine(AGAT_CONVERTSPGFF2TSV.out.tsv)
-                .combine(fusionreport_out)
-                .combine(fusionreport_csv)
+                .join(AGAT_CONVERTSPGFF2TSV.out.tsv)
+                .join(fusionreport_out)
+                .join(fusionreport_csv)
 
             VCF_COLLECT(fusion_data, ch_hgnc_ref, ch_hgnc_date)
             ch_versions = ch_versions.mix(VCF_COLLECT.out.versions)
