@@ -15,7 +15,7 @@ The pipeline is divided into two parts:
 
 2. Running the analysis
 
-- Supported tools: `Arriba`, `FusionCatcher`, `STAR-Fusion`, `StringTie` and `CTAT-SPLICING`
+- Supported tools: `Arriba`, `FusionCatcher`, `STAR-Fusion`, `StringTie` and `CTAT-SPLICING` (the last two are not supported by fusion-report and `StringTie` can be seen as more of an assembly tool that requires manual investigation).
 - QC: `Fastqc`, `MultiQC`, and `Picard CollectInsertSize`, `Picard CollectWgsMetrics`, `Picard Markduplicates`
 - Fusions visualization: `Arriba`, `fusion-report`, `FusionInspector`, and `vcf_collect`
 
