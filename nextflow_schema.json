@@ -344,7 +344,6 @@
                     "default": 1,
                     "fa_icon": "fas fa-search-minus",
                     "description": "FASTP: Inputs with fewer than this reads will be filtered out of the \"reads\" output channel"
-
                 },
                 "save_merged": {
                     "type": "boolean",
