@@ -62,8 +62,6 @@
                 "fastqc",
                 "fastqc/test.html",
                 "fastqc/test.zip",
-                "gatk4",
-                "gatk4/Homo_sapiens.GRCh38.46_dna_primary_assembly.dict",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_plots",
@@ -87,6 +85,7 @@
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.genepred",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.interval_list",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.refflat",
+                "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46_dna_primary_assembly.dict",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa.fai",
                 "references/GRCh38/gencode_v46/star",
@@ -192,7 +191,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-09-02T08:29:13.77559568"
+        "timestamp": "2025-09-04T17:45:42.13657"
     },
     "stub test stringtie": {
         "content": [
@@ -255,8 +254,6 @@
                 "fastqc",
                 "fastqc/test.html",
                 "fastqc/test.zip",
-                "gatk4",
-                "gatk4/Homo_sapiens.GRCh38.46_dna_primary_assembly.dict",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_plots",
@@ -280,6 +277,7 @@
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.genepred",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.interval_list",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.refflat",
+                "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46_dna_primary_assembly.dict",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa.fai",
                 "references/GRCh38/gencode_v46/star",
@@ -315,7 +313,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-09-02T08:29:53.58622226"
+        "timestamp": "2025-09-04T17:47:52.517978"
     },
     "stub test arriba": {
         "content": [
@@ -378,8 +376,6 @@
                 "fastqc",
                 "fastqc/test.html",
                 "fastqc/test.zip",
-                "gatk4",
-                "gatk4/Homo_sapiens.GRCh38.46_dna_primary_assembly.dict",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_plots",
@@ -403,6 +399,7 @@
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.genepred",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.interval_list",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.refflat",
+                "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46_dna_primary_assembly.dict",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa.fai",
                 "references/GRCh38/gencode_v46/star",
@@ -428,7 +425,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-09-02T08:26:49.642086755"
+        "timestamp": "2025-09-04T17:40:41.686721"
     },
     "stub test fusioninspector": {
         "content": [
@@ -539,8 +536,6 @@
                 "fusionreport/test/test.fusions.csv",
                 "fusionreport/test/test.fusions.json",
                 "fusionreport/test/test_fusionreport_index.html",
-                "gatk4",
-                "gatk4/Homo_sapiens.GRCh38.46_dna_primary_assembly.dict",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_plots",
@@ -570,6 +565,7 @@
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.genepred",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.interval_list",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.refflat",
+                "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46_dna_primary_assembly.dict",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa.fai",
                 "references/GRCh38/gencode_v46/star",
@@ -679,7 +675,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-09-02T08:32:46.154112416"
+        "timestamp": "2025-09-04T17:56:24.707034"
     },
     "stub test salmon": {
         "content": [
@@ -740,8 +736,6 @@
                 "fastqc",
                 "fastqc/test.html",
                 "fastqc/test.zip",
-                "gatk4",
-                "gatk4/Homo_sapiens.GRCh38.46_dna_primary_assembly.dict",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_plots",
@@ -766,6 +760,7 @@
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.genepred",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.interval_list",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.refflat",
+                "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46_dna_primary_assembly.dict",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa.fai",
                 "references/GRCh38/gencode_v46/salmon",
@@ -794,7 +789,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-09-02T08:31:56.747683511"
+        "timestamp": "2025-09-04T17:54:08.811545"
     },
     "stub test ctatsplicing": {
         "content": [
@@ -874,8 +869,6 @@
                 "fastqc",
                 "fastqc/test.html",
                 "fastqc/test.zip",
-                "gatk4",
-                "gatk4/Homo_sapiens.GRCh38.46_dna_primary_assembly.dict",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_plots",
@@ -899,6 +892,7 @@
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.genepred",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.interval_list",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.refflat",
+                "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46_dna_primary_assembly.dict",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa.fai",
                 "references/GRCh38/gencode_v46/star",
@@ -1008,7 +1002,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-09-02T08:27:33.646044212"
+        "timestamp": "2025-09-04T17:42:17.062793"
     },
     "stub test fusionreport": {
         "content": [
@@ -1100,8 +1094,6 @@
                 "fusionreport/test/test.fusions.csv",
                 "fusionreport/test/test.fusions.json",
                 "fusionreport/test/test_fusionreport_index.html",
-                "gatk4",
-                "gatk4/Homo_sapiens.GRCh38.46_dna_primary_assembly.dict",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_plots",
@@ -1131,6 +1123,7 @@
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.genepred",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.interval_list",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.refflat",
+                "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46_dna_primary_assembly.dict",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa.fai",
                 "references/GRCh38/gencode_v46/star",
@@ -1236,7 +1229,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-09-02T08:30:34.704355039"
+        "timestamp": "2025-09-04T17:50:22.553497"
     },
     "stub test fastp": {
         "content": [
@@ -1303,8 +1296,6 @@
                 "fastqc_for_fastp",
                 "fastqc_for_fastp/test_trimmed.html",
                 "fastqc_for_fastp/test_trimmed.zip",
-                "gatk4",
-                "gatk4/Homo_sapiens.GRCh38.46_dna_primary_assembly.dict",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_plots",
@@ -1328,6 +1319,7 @@
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.genepred",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.interval_list",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.refflat",
+                "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46_dna_primary_assembly.dict",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa.fai"
             ]
@@ -1336,7 +1328,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-09-02T08:31:12.481382473"
+        "timestamp": "2025-09-04T17:52:24.935928"
     },
     "stub test fusioncatcher": {
         "content": [
@@ -1395,8 +1387,6 @@
                 "fusioncatcher/test.fusion-genes.txt",
                 "fusioncatcher/test.log",
                 "fusioncatcher/test.summary.txt",
-                "gatk4",
-                "gatk4/Homo_sapiens.GRCh38.46_dna_primary_assembly.dict",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_plots",
@@ -1420,6 +1410,7 @@
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.genepred",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.interval_list",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.refflat",
+                "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46_dna_primary_assembly.dict",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa.fai"
             ]
@@ -1428,7 +1419,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-09-02T08:28:10.779582543"
+        "timestamp": "2025-09-04T17:43:49.673677"
     },
     "stub test all": {
         "content": [
@@ -1597,8 +1588,6 @@
                 "fusionreport/test/test.fusions.csv",
                 "fusionreport/test/test.fusions.json",
                 "fusionreport/test/test_fusionreport_index.html",
-                "gatk4",
-                "gatk4/Homo_sapiens.GRCh38.46_dna_primary_assembly.dict",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_plots",
@@ -1629,6 +1618,7 @@
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.genepred",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.interval_list",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46.gtf.refflat",
+                "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46_dna_primary_assembly.dict",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa",
                 "references/GRCh38/gencode_v46/gencode/Homo_sapiens.GRCh38.46_dna_primary_assembly.fa.fai",
                 "references/GRCh38/gencode_v46/salmon",
@@ -1774,6 +1764,6 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-09-02T08:26:08.667543202"
+        "timestamp": "2025-09-04T17:39:00.417725"
     }
 }
