@@ -34,7 +34,7 @@ reports:
   "**/picard/*insert*size*metrics.txt":
     display: "GATK4: Metrics from InsertSizeMetrics"
   "**/picard/*.pdf":
-    display: "Picard PDF reports"
+    display: "GATK4: InsertSizeMetrics histogram"
   "**/star_for_starfusion/*ReadsPerGene.out.tab":
     display: "Number of reads per gene"
   "**/starfusion/*.starfusion.fusion_predictions.tsv":
