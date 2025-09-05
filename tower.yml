@@ -33,7 +33,7 @@ reports:
     display: "GATK4: Metrics from MarkDuplicates"
   "**/picard/*insert*size*metrics.txt":
     display: "GATK4: Metrics from InsertSizeMetrics"
-  "**/picard/*.pdf":
+  "**/picard/*pdf":
     display: "GATK4: InsertSizeMetrics histogram"
   "**/star_for_starfusion/*ReadsPerGene.out.tab":
     display: "Number of reads per gene"
