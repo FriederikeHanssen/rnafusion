@@ -21,8 +21,6 @@ reports:
     display: "Fusion-report HTML report"
   "**/fusionreport/*/*.html":
     display: "Individual fusion report HTML files"
-  "**/multiqc/multiqc_report.html":
-    display: "MultiQC HTML report"
   "**/pipeline_info/execution_report_*.html":
     display: "Pipeline execution report HTML"
   "**/pipeline_info/pipeline_dag_*.html":
