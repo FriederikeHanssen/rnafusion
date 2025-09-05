@@ -17,10 +17,8 @@ reports:
     display: "FusionInspector web HTML report"
   "**/fusioninspector/*.FusionInspector.fusions.abridged.tsv":
     display: "FusionInspector TSV report"
-  "**/fusionreport/*/*_fusionreport_index.html":
-    display: "Fusion-report HTML report"
   "**/fusionreport/*/*.html":
-    display: "Individual fusion report HTML files"
+    display: "Fusion-report HTML files"
   "**/pipeline_info/execution_report_*.html":
     display: "Pipeline execution report HTML"
   "**/pipeline_info/pipeline_dag_*.html":
