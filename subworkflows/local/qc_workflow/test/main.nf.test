@@ -13,8 +13,8 @@ nextflow_workflow {
         setup {
 
             // Create refflat reference
-            run("GTF_TO_REFFLAT") {
-                script "../../../../modules/local/uscs/custom_gtftogenepred/main.nf"
+            run("UCSC_GTFTOGENEPRED") {
+                script "../../../../modules/nf-core/ucsc/gtftogenepred/main.nf"
                 process {
                     """
                     input[0] =Channel.of(
@@ -34,8 +34,8 @@ nextflow_workflow {
                     """
                     input[0] = Channel.of(
                         [
-                            [id: 'fasta'],
-                            file("https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/modules/data/genomics/homo_sapiens/genome/genome.gtf", checkIfExist: true)
+                            [id: 'gtf'],
+                            file("https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/modules/data/genomics/homo_sapiens/genome/genome.gtf", checkIfExists: true)
                         ]
                     )
                     """
@@ -60,8 +60,8 @@ nextflow_workflow {
                     input[0] = AGAT_CONVERTGFF2BED.out.bed
                     input[1] = Channel.of(
                         [
-                            [id: 'chr22_dic'],
-                            file("https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/modules/data/genomics/homo_sapiens/genome/genome.dict", checkIfExist: true)
+                            [id: 'chr22_dict'],
+                            file("https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/modules/data/genomics/homo_sapiens/genome/genome.dict", checkIfExists: true)
                         ]
                     )
                     """
@@ -75,8 +75,9 @@ nextflow_workflow {
             params {
                 skip_qc              = false
                 fusioninspector_only = false
-                starfusion           = true
-                all                  = true
+                tools                = "starfusion"
+                outdir               = "test"
+
             }
 
             workflow {
@@ -89,12 +90,12 @@ nextflow_workflow {
                     ])
 
                 // ch_refflat
-                input[1] = GTF_TO_REFFLAT.out.refflat.map { that -> [[id:that.Name], that] }
+                input[1] = UCSC_GTFTOGENEPRED.out.refflat
                 // ch_fasta
                 input[2] = Channel.of(
                     [
                         [ id: "test_ref" ],
-                        file("https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/modules/data/genomics/homo_sapiens/genome/genome.fasta", checkIfExist: true)
+                        file("https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/modules/data/genomics/homo_sapiens/genome/genome.fasta", checkIfExists: true)
                     ]
                 )
 
@@ -102,12 +103,13 @@ nextflow_workflow {
                 input[3] = Channel.of(
                     [
                         [ id: "test_ref" ],
-                        file("https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/modules/data/genomics/homo_sapiens/genome/genome.fasta.fai", checkIfExist: true)
+                        file("https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/modules/data/genomics/homo_sapiens/genome/genome.fasta.fai", checkIfExists: true)
                     ] )
 
                 // ch rRNA interval list
                 input[4] = GATK4_BEDTOINTERVALLIST.out.interval_list
                 """
+
             }
         }
 
