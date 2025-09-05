@@ -17,12 +17,16 @@ reports:
     display: "FusionInspector web HTML report"
   "**/fusioninspector/*.FusionInspector.fusions.abridged.tsv":
     display: "FusionInspector TSV report"
+  "**/fusionreport/*/*_fusionreport_index.html":
+    display: "Fusion-report HTML report"
   "**/fusionreport/*/*.html":
-    display: "Fusion-report HTML files"
+    display: "Individual fusion report HTML files"
   "**/pipeline_info/execution_report_*.html":
     display: "Pipeline execution report HTML"
   "**/pipeline_info/pipeline_dag_*.html":
     display: "Pipeline DAG HTML"
+  "**/vcf/*_fusion_data.vcf":
+    display: "Collected statistics on each fusion fed to FusionInspector in VCF format"
   "**/picard/*.MarkDuplicates.metrics.txt":
     display: "Picard: Metrics from CollectRnaMetrics"
   "**/picard/*_rna_metrics.txt":
@@ -37,5 +41,3 @@ reports:
     display: "STAR-Fusion identified fusion TSV report"
   "**/stringtie/*/*stringtie.merged.gtf":
     display: "Merged GTFs from StringTie with annotations"
-  "**/vcf/*_fusion_data.vcf":
-    display: "Collected statistics on each fusion fed to FusionInspector in VCF format"
