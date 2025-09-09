@@ -31,7 +31,7 @@ workflow FUSIONINSPECTOR_WORKFLOW {
 
         if (whitelist)  {
             ch_whitelist = ch_fusion_list.combine(Channel.value(file(whitelist, checkIfExists:true)))
-                            .map { meta, fusions, whitelist -> [ meta, [fusions, whitelist] ] }
+                            .map { meta, fusions, whitelist_file -> [ meta, [fusions, whitelist_file] ] }
 
             CAT_CAT(ch_whitelist) // fusioninspector takes care of possible duplicates
             ch_versions = ch_versions.mix(CAT_CAT.out.versions)
@@ -47,7 +47,9 @@ workflow FUSIONINSPECTOR_WORKFLOW {
         def tsv_nonempty = FUSIONINSPECTOR.out.tsv.filter { _meta, file -> file.exists() && file.size() > 0 }
         def tsv_abridged_nonempty = FUSIONINSPECTOR.out.abridged_tsv.filter { _meta, file -> file.exists() && file.size() > 0 }
         def gtf_nonempty = FUSIONINSPECTOR.out.out_gtf.filter { _meta, file -> file.exists() && file.size() > 0 }
-
+        if (!tsv_nonempty) {
+            log.warn("FUSIONINSPECTOR confirmed no fusions, skipping VCF and visualisation steps.")
+        }
         if (
             !skip_vcf
         ) {
@@ -61,7 +63,10 @@ workflow FUSIONINSPECTOR_WORKFLOW {
 
             VCF_COLLECT(fusion_data, ch_hgnc_ref, ch_hgnc_date)
             ch_versions = ch_versions.mix(VCF_COLLECT.out.versions)
-
+        }
+        if (
+            !skip_vis
+        ){
             ch_bam_sorted_indexed_fusions = bam_sorted_indexed.join(tsv_nonempty)
             ARRIBA_VISUALISATION(
                 ch_bam_sorted_indexed_fusions,
@@ -71,8 +76,6 @@ workflow FUSIONINSPECTOR_WORKFLOW {
             )
             ch_versions = ch_versions.mix(ARRIBA_VISUALISATION.out.versions)
             ch_arriba_visualisation = ARRIBA_VISUALISATION.out.pdf
-        } else {
-            log.warn("FUSIONINSPECTOR confirmed no fusions, skipping VCF and visualisation steps.")
         }
 
     emit:
