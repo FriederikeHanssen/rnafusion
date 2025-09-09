@@ -191,7 +191,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-09-03T15:03:29.812853"
+        "timestamp": "2025-09-04T17:45:42.13657"
     },
     "stub test stringtie": {
         "content": [
@@ -313,7 +313,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-09-03T15:05:06.630556"
+        "timestamp": "2025-09-04T17:47:52.517978"
     },
     "stub test arriba": {
         "content": [
@@ -425,7 +425,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-09-03T14:58:37.480648"
+        "timestamp": "2025-09-04T17:40:41.686721"
     },
     "stub test fusioninspector": {
         "content": [
@@ -660,7 +660,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-09-03T15:11:58.199402"
+        "timestamp": "2025-09-04T17:56:24.707034"
     },
     "stub test salmon": {
         "content": [
@@ -774,7 +774,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-09-03T15:10:03.376978"
+        "timestamp": "2025-09-04T17:54:08.811545"
     },
     "stub test ctatsplicing": {
         "content": [
@@ -987,7 +987,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-09-03T15:00:17.678361"
+        "timestamp": "2025-09-04T17:42:17.062793"
     },
     "stub test fusionreport": {
         "content": [
@@ -1214,7 +1214,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-09-03T15:06:51.996134"
+        "timestamp": "2025-09-04T17:50:22.553497"
     },
     "stub test fastp": {
         "content": [
@@ -1313,7 +1313,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-09-03T15:08:28.85535"
+        "timestamp": "2025-09-04T17:52:24.935928"
     },
     "stub test fusioncatcher": {
         "content": [
@@ -1404,7 +1404,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-09-03T15:01:52.523177"
+        "timestamp": "2025-09-04T17:43:49.673677"
     },
     "stub test all": {
         "content": [
@@ -1734,6 +1734,6 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-09-03T14:56:57.734145"
+        "timestamp": "2025-09-04T17:39:00.417725"
     }
 }

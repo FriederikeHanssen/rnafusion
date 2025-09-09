@@ -75,6 +75,8 @@ nextflow_workflow {
                 skip_qc              = false
                 fusioninspector_only = false
                 tools               = "all"
+                outdir               = "test"
+
             }
 
             workflow {
@@ -92,7 +94,7 @@ nextflow_workflow {
                 input[2] = Channel.of(
                     [
                         [ id: "test_ref" ],
-                        file("https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/modules/data/genomics/homo_sapiens/genome/genome.fasta", checkIfExist: true)
+                        file("https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/modules/data/genomics/homo_sapiens/genome/genome.fasta", checkIfExists: true)
                     ]
                 )
 
@@ -100,12 +102,13 @@ nextflow_workflow {
                 input[3] = Channel.of(
                     [
                         [ id: "test_ref" ],
-                        file("https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/modules/data/genomics/homo_sapiens/genome/genome.fasta.fai", checkIfExist: true)
+                        file("https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/modules/data/genomics/homo_sapiens/genome/genome.fasta.fai", checkIfExists: true)
                     ] )
 
                 // ch rRNA interval list
                 input[4] = GATK4_BEDTOINTERVALLIST.out.interval_list
                 """
+
             }
         }
 

@@ -19,9 +19,9 @@ workflow QC_WORKFLOW {
 
         PICARD_COLLECTRNASEQMETRICS(
             ch_bam_sorted,
-            ch_refflat.map{ _meta, refflat -> [ refflat ] },
-            ch_fasta.map{ _meta, fasta -> [ fasta ] },
-            ch_rrna_interval.map{ _meta, intervals -> [ intervals ] }.ifEmpty([])
+            ch_refflat.map{ _meta, refflat -> refflat },
+            ch_fasta.map{ _meta, fasta -> fasta  },
+            ch_rrna_interval.map{ _meta, intervals -> intervals }
         ) // Some chromosome or annotation may not have rRNA genes
         ch_versions = ch_versions.mix(PICARD_COLLECTRNASEQMETRICS.out.versions)
         ch_rnaseq_metrics = PICARD_COLLECTRNASEQMETRICS.out.metrics

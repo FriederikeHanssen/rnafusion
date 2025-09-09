@@ -236,7 +236,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-09-03T14:26:01.049466"
+        "timestamp": "2025-09-04T17:13:34.296716"
     },
     "stub test stringtie": {
         "content": [
@@ -400,7 +400,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-09-03T14:27:50.733492"
+        "timestamp": "2025-09-04T17:15:18.001786"
     },
     "stub test arriba": {
         "content": [
@@ -557,7 +557,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-09-03T14:20:11.549426"
+        "timestamp": "2025-09-04T17:07:39.086364"
     },
     "stub test fusioninspector": {
         "content": [
@@ -834,7 +834,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-09-03T14:34:09.933192"
+        "timestamp": "2025-09-04T17:21:42.479016"
     },
     "stub test salmon": {
         "content": [
@@ -929,7 +929,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-09-03T14:32:07.557489"
+        "timestamp": "2025-09-04T17:19:36.873298"
     },
     "stub test ctatsplicing": {
         "content": [
@@ -1184,7 +1184,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-09-03T14:21:57.973003"
+        "timestamp": "2025-09-04T17:09:29.991365"
     },
     "stub test fusionreport": {
         "content": [
@@ -1456,7 +1456,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-09-03T14:29:47.966689"
+        "timestamp": "2025-09-04T17:17:14.759248"
     },
     "stub test fastp": {
         "content": [
@@ -1536,7 +1536,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-09-03T14:30:56.64966"
+        "timestamp": "2025-09-04T17:18:27.651568"
     },
     "stub test fusioncatcher": {
         "content": [
@@ -1608,7 +1608,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-09-03T14:23:05.549559"
+        "timestamp": "2025-09-04T17:10:40.658609"
     },
     "stub test fusioncatcher trim": {
         "content": [
@@ -1689,7 +1689,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-09-03T14:24:14.169033"
+        "timestamp": "2025-09-04T17:11:47.659941"
     },
     "stub test all": {
         "content": [
@@ -2061,6 +2061,6 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-09-03T14:18:24.876773"
+        "timestamp": "2025-09-04T17:05:39.966652"
     }
 }
