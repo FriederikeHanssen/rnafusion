@@ -61,7 +61,7 @@ nextflow_workflow {
                     input[1] = Channel.of(
                         [
                             [id: 'chr22_dict'],
-                            file("https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/modules/data/genomics/homo_sapiens/genome/genome.dict", checkIfExists: true)
+                            file("https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/modules/data/genomics/homo_sapiens/genome/genome.dict", checkIfExist: true)
                         ]
                     )
                     """
@@ -71,11 +71,10 @@ nextflow_workflow {
         }
 
         when {
-            // Params to activate modules ext.when condition
             params {
                 skip_qc              = false
                 fusioninspector_only = false
-                tools                = "starfusion"
+                tools               = "all"
                 outdir               = "test"
 
             }

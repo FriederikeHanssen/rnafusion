@@ -429,18 +429,12 @@
     },
     "stub test fusioninspector": {
         "content": [
-            23,
+            20,
             {
                 "AGAT_CONVERTGFF2BED": {
                     "agat": "v1.5.1"
                 },
-                "AGAT_CONVERTSPGFF2TSV": {
-                    "agat": "v1.4.1"
-                },
                 "ARRIBA_ARRIBA": {
-                    "arriba": "2.5.0"
-                },
-                "ARRIBA_VISUALISATION": {
                     "arriba": "2.5.0"
                 },
                 "BIOAWK": {
@@ -496,10 +490,6 @@
                 "UCSC_GTFTOGENEPRED": {
                     "ucsc": 447
                 },
-                "VCF_COLLECT": {
-                    "python": "3.11.0",
-                    "vcf_collect": 0.1
-                },
                 "Workflow": {
                     "nf-core/rnafusion": "v4.0.0dev"
                 }
@@ -507,12 +497,9 @@
             [
                 "agat",
                 "agat/Homo_sapiens.GRCh38.46.gtf.bed",
-                "agat/test.tsv",
                 "arriba",
                 "arriba/test.arriba.fusions.discarded.tsv",
                 "arriba/test.arriba.fusions.tsv",
-                "arriba_visualisation",
-                "arriba_visualisation/test_combined_fusions_arriba_visualisation.pdf",
                 "bioawk",
                 "bioawk/Homo_sapiens.GRCh38.46.gtf_rrna.gtf.gz",
                 "fastqc",
@@ -666,9 +653,7 @@
                 "references/GRCh38/hgnc/hgnc_complete_set.txt",
                 "star",
                 "star/test.Aligned.sortedByCoord.out.bam",
-                "star/test.Aligned.sortedByCoord.out.bam.bai",
-                "vcf",
-                "vcf/test_fusion_data.vcf"
+                "star/test.Aligned.sortedByCoord.out.bam.bai"
             ]
         ],
         "meta": {
@@ -1423,18 +1408,12 @@
     },
     "stub test all": {
         "content": [
-            34,
+            31,
             {
                 "AGAT_CONVERTGFF2BED": {
                     "agat": "v1.5.1"
                 },
-                "AGAT_CONVERTSPGFF2TSV": {
-                    "agat": "v1.4.1"
-                },
                 "ARRIBA_ARRIBA": {
-                    "arriba": "2.5.0"
-                },
-                "ARRIBA_VISUALISATION": {
                     "arriba": "2.5.0"
                 },
                 "BIOAWK": {
@@ -1523,10 +1502,6 @@
                 "UCSC_GTFTOGENEPRED": {
                     "ucsc": 447
                 },
-                "VCF_COLLECT": {
-                    "python": "3.11.0",
-                    "vcf_collect": 0.1
-                },
                 "Workflow": {
                     "nf-core/rnafusion": "v4.0.0dev"
                 }
@@ -1534,12 +1509,9 @@
             [
                 "agat",
                 "agat/Homo_sapiens.GRCh38.46.gtf.bed",
-                "agat/test.tsv",
                 "arriba",
                 "arriba/test.arriba.fusions.discarded.tsv",
                 "arriba/test.arriba.fusions.tsv",
-                "arriba_visualisation",
-                "arriba_visualisation/test_combined_fusions_arriba_visualisation.pdf",
                 "bioawk",
                 "bioawk/Homo_sapiens.GRCh38.46.gtf_rrna.gtf.gz",
                 "ctatsplicing",
@@ -1755,9 +1727,7 @@
                 "stringtie/test.ballgown",
                 "stringtie/test.coverage.gtf",
                 "stringtie/test.gene.abundance.txt",
-                "stringtie/test.transcripts.gtf",
-                "vcf",
-                "vcf/test_fusion_data.vcf"
+                "stringtie/test.transcripts.gtf"
             ]
         ],
         "meta": {
