@@ -71,12 +71,10 @@ nextflow_workflow {
         }
 
         when {
-            // Params to activate modules ext.when condition
             params {
                 skip_qc              = false
                 fusioninspector_only = false
-                starfusion           = true
-                all                  = true
+                tools               = "all"
             }
 
             workflow {
