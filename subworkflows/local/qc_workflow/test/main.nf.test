@@ -13,8 +13,8 @@ nextflow_workflow {
         setup {
 
             // Create refflat reference
-            run("GTF_TO_REFFLAT") {
-                script "../../../../modules/local/uscs/custom_gtftogenepred/main.nf"
+            run("UCSC_GTFTOGENEPRED") {
+                script "../../../../modules/nf-core/ucsc/gtftogenepred/main.nf"
                 process {
                     """
                     input[0] =Channel.of(
@@ -87,7 +87,7 @@ nextflow_workflow {
                     ])
 
                 // ch_refflat
-                input[1] = GTF_TO_REFFLAT.out.refflat.map { that -> [[id:that.Name], that] }
+                input[1] = UCSC_GTFTOGENEPRED.out.refflat
                 // ch_fasta
                 input[2] = Channel.of(
                     [
