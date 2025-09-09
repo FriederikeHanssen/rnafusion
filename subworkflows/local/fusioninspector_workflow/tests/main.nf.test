@@ -110,7 +110,7 @@ nextflow_workflow {
                 input[12] = false
                 input[13] = true
                 input[14] = 1
-                input[15] = params.whitelist
+                input[15] = []
                 """
             }
         }
