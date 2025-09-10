@@ -125,6 +125,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix rRNA detection in GTF using `transcript_type` [#749](https://github.com/nf-core/rnafusion/pull/749)
 - Fixed nf-test for `QC_WORKFLOW` subworkflow [#756](https://github.com/nf-core/rnafusion/pull/756)
 - Fixed issue with bed creation, modifying AGAT arguments for non-coding CDS [#763](https://github.com/nf-core/rnafusion/pull/763)
+- Fixed fusioncatcher hardlink issues in filesystems that don't allow hardlinks [#764](https://github.com/nf-core/rnafusion/pull/764)
 
 ### Removed
 

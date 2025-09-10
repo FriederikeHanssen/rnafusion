@@ -4,8 +4,8 @@ process FUSIONCATCHER_FUSIONCATCHER {
 
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/fusioncatcher:1.33--hdfd78af_5':
-        'biocontainers/fusioncatcher:1.33--hdfd78af_5' }"
+        'https://depot.galaxyproject.org/singularity/fusioncatcher:1.33b--hdfd78af_0':
+        'biocontainers/fusioncatcher:1.33b--hdfd78af_0' }"
 
     input:
     tuple val(meta), path(fastqs)
