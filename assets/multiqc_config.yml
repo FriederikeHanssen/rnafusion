@@ -17,23 +17,23 @@ disable_version_detection: true
 
 # Run only these modules
 run_modules:
-- custom_content
-- fastqc
-- fastp
-- star
-- samtools
-- picard
-- arriba
+  - custom_content
+  - fastqc
+  - fastp
+  - star
+  - samtools
+  - picard
+  - arriba
 
 module_order:
-- fastp
-- fastqc:
-    name: "FastQC (raw)"
-    info: "This section of the report shows FastQC results before adapter trimming."
-    path_filters:
-    - "*.zip"
-- fastqc:
-    name: "FastQC (trimmed)"
-    info: "This section of the report shows FastQC results after adapter trimming."
-    path_filters:
-    - "*_trimmed*.zip"
+  - fastp
+  - fastqc:
+      name: "FastQC (raw)"
+      info: "This section of the report shows FastQC results before adapter trimming."
+      path_filters:
+        - "*.zip"
+  - fastqc:
+      name: "FastQC (trimmed)"
+      info: "This section of the report shows FastQC results after adapter trimming."
+      path_filters:
+        - "*_trimmed*.zip"
