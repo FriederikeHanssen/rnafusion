@@ -282,7 +282,7 @@ nextflow run nf-core/rnafusion \
 
 The additional `--trim_tail_fusioncatcher` flag will toggle an additional `fastp` process, especially useful is reads are above 100 bp, which is not handled well by FusionCatcher. The parameter `--trim_tail_fusioncatcher` needs to be provided with the number of bases to remove from the tail end.
 
-#### Filter fusions detected by 2 or more tools
+#### Filter for fusions detected by several tools
 
 ```bash
 nextflow run nf-core/rnafusion \
