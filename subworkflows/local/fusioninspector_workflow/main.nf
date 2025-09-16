@@ -66,7 +66,7 @@ workflow FUSIONINSPECTOR_WORKFLOW {
         }
         if (
             !skip_vis
-        ){
+        ) {
             ch_bam_sorted_indexed_fusions = bam_sorted_indexed.join(tsv_nonempty)
             ARRIBA_VISUALISATION(
                 ch_bam_sorted_indexed_fusions,
