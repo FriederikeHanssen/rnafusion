@@ -104,7 +104,7 @@ If no parameters are specified, the default is applied.
 <details markdown="1">
 <summary>Output files</summary>
 
-- `arriba/`
+- `agat/`
   - `<sample>.tsv`
 
 </details>
