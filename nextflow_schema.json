@@ -594,13 +594,13 @@
                 },
                 "seq_center": {
                     "type": "string",
-                    "description": "Sequencing center",
+                    "description": "Sequencing center, used to fill in read group CN tag in the BAM header",
                     "fa_icon": "fas fa-toolbox",
                     "help_text": "This will reported in the BAM header as CN"
                 },
                 "seq_platform": {
                     "type": "string",
-                    "description": "Sequencing platform",
+                    "description": "Sequencing platform, used to fill in read group PL tag in the BAM header",
                     "fa_icon": "fas fa-toolbox",
                     "help_text": "This will reported in the BAM header as PL."
                 },
