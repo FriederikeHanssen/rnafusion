@@ -3,23 +3,179 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## v4.0.0 - [2025-09-10]
+
+### Added
+
+- Normalized gene expression calculated [#488](https://github.com/nf-core/rnafusion/pull/488)
+- Primary assembly now used as main reference genome FASTA file, as recommended by the STAR manual [#488](https://github.com/nf-core/rnafusion/pull/488)
+- Use of only ensembl GTF file, not chr.gtf file as GTF reference file [#488](https://github.com/nf-core/rnafusion/pull/488)
+- Add nf-test to local module: `ENSEMBL_DOWNLOAD` [#539](https://github.com/nf-core/rnafusion/pull/539)
+- Add nf-test to local module: `HGNC_DOWNLOAD` [#540](https://github.com/nf-core/rnafusion/pull/540)
+- Add nf-test to local subworkflow: `STRINGTIE_WORKFLOW` [#541](https://github.com/nf-core/rnafusion/pull/541)
+- Option to avoid using COSMIC (for example in the case of clinical use) [#547](https://github.com/nf-core/rnafusion/pull/547)
+- Add nf-test to nf-core module: `PICARD_COLLECTRNASEQMETRICS` and update module [#551](https://github.com/nf-core/rnafusion/pull/551)
+- Add `--skip_vcf` boolean parameter to skip vcf file generation [#554](https://github.com/nf-core/rnafusion/pull/554)
+- Add nf-test to local module: `FUSIONREPORT_DOWNLOAD` [#560](https://github.com/nf-core/rnafusion/pull/560)
+- Add nf-test to local subworkflow: `QC_WORKFLOW` [#568](https://github.com/nf-core/rnafusion/pull/568)
+- Add nf-test to local subworkflow: `TRIM_WORKFLOW` [#572](https://github.com/nf-core/rnafusion/pull/572)
+- Add nf-test to local module: `FUSIONREPORT_DETECT`. Improve `FUSIONREPORT_DOWNLOAD` module [#577](https://github.com/nf-core/rnafusion/pull/577)
+- Add nf-test to local subworkflow: `ARRIBA_WORKFLOW` [#578](https://github.com/nf-core/rnafusion/pull/578)
+- Add nf-test to local module: `STARFUSION_BUILD`. [#585](https://github.com/nf-core/rnafusion/pull/585)
+- Add nf-test to local module: `STARFUSION_DETECT`. [#586](https://github.com/nf-core/rnafusion/pull/586)
+- Added a new module `CTATSPLICING_STARTOCANCERINTRONS` and a new parameter `--ctatsplicing`. This options creates reports on cancer splicing aberrations and requires one or both of `--arriba` and `--starfusion` to be given. [#587](https://github.com/nf-core/rnafusion/pull/587)
+- Add parameter `--references_only` when no data should be analysed, but only the references should be built [#505](https://github.com/nf-core/rnafusion/pull/505)
+- Add nf-test to local subworkflow: `FUSIONCATCHER_WORKFLOW` [#591](https://github.com/nf-core/rnafusion/pull/591)
+- Add nf-test to local subworkflow: `STARFUSION_WORKFLOW`. [#597](https://github.com/nf-core/rnafusion/pull/597)
+- Add nf-test to local module: `FUSIONINSPECTOR`. [#601](https://github.com/nf-core/rnafusion/pull/601)
+- Added `CTATSPLICING_PREPGENOMELIB` to update the starfusion genome library directory with a cancer splicing index. [#610](https://github.com/nf-core/rnafusion/pull/610)
+- Add nf-test to local subworkflow: `FUSIONREPORT_WORKFLOW`. [#607](https://github.com/nf-core/rnafusion/pull/607)
+- Add nf-test to local module: `ARRIBA_VISUALISATION`. [#625](https://github.com/nf-core/rnafusion/pull/625)
+- Added the following fields to the samplesheet [#647](https://github.com/nf-core/rnafusion/pull/647):
+  - `bam`: A BAM file aligned with STAR, it's the responsibility of the pipeline user to make sure this file has been correctly called.
+  - `bai`: The index of the BAM file, this is not required when a `bam` file has been given but can increase the pipeline speed a bit.
+  - `cram`: A CRAM file aligned with STAR, it's the responsibility of the pipeline user to make sure this file has been correctly called.
+  - `crai`: The index of the CRAM file, this is not required when a `cram` file has been given but can increase the pipeline speed a bit.
+  - `junctions`: A file containing the junctions determined by STAR (needed by `starfusion` and `ctatsplicing`)
+  - `splice_junctions` A file containing the splice junctions determined by STAR (needed by `ctatsplicing`)
+- Added `--fusioncatcher_download_link`. [#650](https://github.com/nf-core/rnafusion/pull/650)
+- Added the `seq_platform` and `seq_center` fields to the samplesheet. These values can be used to overwrite the value of `--seq_platform` and `--seq_center` on a sample-by-sample basis [#654](https://github.com/nf-core/rnafusion/pull/654)
+- Moved strandedness determination for picard collectrnaseqmetrics into modules.config [#658](https://github.com/nf-core/rnafusion/pull/658)
+- Using option `--human_gencode_filter` while building STARFusion references for human species [#657](https://github.com/nf-core/rnafusion/pull/657)
+- Added `--star_limit_bam_sort_ram` to set the maximum memory for sorting the BAM files in STAR. [#668](https://github.com/nf-core/rnafusion/pull/668)
+- Update STAR-Fusion to 1.15.0 and update nf-core modules [#664](https://github.com/nf-core/rnafusion/pull/664)
+- Update fusionreport 4.0.0 that replaces the score of a fusion with a Fusion Indication Index [#667](https://github.com/nf-core/rnafusion/pull/667)
+- Added a extra trimming step for fusioncatcher in case a different read-length is wished for this tool only [#674](https://github.com/nf-core/rnafusion/pull/674)
+- Added support for references hosted on the nf-core AWS S3 bucket. [#717](https://github.com/nf-core/rnafusion/pull/717)
+- Added `--dfam_hmm`, `--dfam_h3f`, `--dfam_h3i`, `--dfam_h3m`, `--dfam_h3p`, `--pfam_file` and `--annot_filter_url` parameters to allow use of custom files in `STARFUSION_BUILD` module [#709](https://github.com/nf-core/rnafusion/pull/709)
+- Add nf-test to local module: `VCF_COLLECT`. [#745](https://github.com/nf-core/rnafusion/pull/745)
+- Added nf-test for local subworkflow: `FUSIONINSPECTOR_WORKFLOW`. [#753](https://github.com/nf-core/rnafusion/pull/753)
+
+### Changed
+
+- Updated modules and migrated non-specific modules to nf-core/modules [#484](https://github.com/nf-core/rnafusion/pull/484)
+- Updated to nf-core/tools 3.0.2 [#504](https://github.com/nf-core/rnafusion/pull/504)
+- Remove local module `RRNA_TRANSCRIPTS` (replaced by nf-core module) [#541](https://github.com/nf-core/rnafusion/pull/541)
+- Allow fastq files without a dot before .fn(.gz)/.fastq(.gz) files [#548](https://github.com/nf-core/rnafusion/pull/548)
+- Remove double nested folder introduced in [#577](https://github.com/nf-core/rnafusion/pull/577), [#581](https://github.com/nf-core/rnafusion/pull/581)
+- Use docker.io and galaxy containers for fusioncatcher and starfusion (incl. fusioninspector) instead of wave as they are not functional on wave [#588](https://github.com/nf-core/rnafusion/pull/588)
+- Update STAR-Fusion to 1.14 [#588](https://github.com/nf-core/rnafusion/pull/588)
+- Use "-genePredExt -geneNameAsName2 -ignoreGroupsWithoutExons" (to mimic gms/tomte) for GTF_TO_REFFLAT [#505](https://github.com/nf-core/rnafusion/pull/505)
+- Integrate reference building in the main workflow [#505](https://github.com/nf-core/rnafusion/pull/505)
+- Move from ensembl to gencode base [#505](https://github.com/nf-core/rnafusion/pull/505)
+- Update from ensembl 102 to gencode 46 default references [#505](https://github.com/nf-core/rnafusion/pull/505)
+- Update`FUSIONINSPECTOR` to v2.10.0. [#601](https://github.com/nf-core/rnafusion/pull/601)
+- Remove local module `STARFUSION_DOWNLOAD` [#598](https://github.com/nf-core/rnafusion/pull/598)
+- Fix error message when parameter outdir is missing [#611](https://github.com/nf-core/rnafusion/pull/611)
+- Updated documentation for fusion-report score calculation to reflect 80/20 weight distribution between thttps://github.com/nf-core/rnafusion/pull/633ool detection and database hits [#620](https://github.com/nf-core/rnafusion/pull/620)
+- The STAR alignment now only runs once instead of multiple times when using `--arriba` and `--starfusion` [#633](https://github.com/nf-core/rnafusion/pull/633)
+- The `--cram` parameter has been converted to a boolean value instead of the comma-separated list of values. Use this parameter if you also want to create CRAM files from the BAM files created with STAR [#633](https://github.com/nf-core/rnafusion/pull/633)
+- Update htslib and samtools version in `star/align` to 1.21 [#634](https://github.com/nf-core/rnafusion/pull/634)
+- Updated Zenodo DOI in badge [#639](https://github.com/nf-core/rnafusion/pull/639)
+- `--run_fusioncatcher` back to `fusioncatcher` [#641](https://github.com/nf-core/rnafusion/pull/641)
+- Removed `--fastp_trim`, `--arriba`, `--ctatsplicing`, `--fusioncatcher`, `--starfusion`, `--stringtie` and `--all` and replaced these parameters with the `--tools` parameter. This parameter takes a comma-delimited list of tool names to run for the pipeline and is a required parameter. Following tools are supported by this parameter [#645](https://github.com/nf-core/rnafusion/pull/645):
+  - `arriba`
+  - `ctatsplicing`
+  - `fusioncatcher`
+  - `starfusion`
+  - `stringtie`
+  - `fusionreport`
+  - `fastp`
+  - `salmon`
+  - `fusioninspector`
+  - `all` => This will automatically run all of the above tools
+- Updated all `wget` containers to `conda-forge::wget=1.21.4` [#655](https://github.com/nf-core/rnafusion/pull/655)
+- Using FusionInspector abridged output (that now contains coding effects) for downstream analysis [#669](https://github.com/nf-core/rnafusion/pull/669)
+- Replaced local `FUSIONREPORT` and `FUSIONREPORT_DOWNLOAD` with `FUSIONREPORT_DETECT` and `FUSIONREPORT_DOWNLOAD` from nf-core [#703](https://github.com/nf-core/rnafusion/pull/703)
+- Updated arriba to v2.5.0 [#693](https://github.com/nf-core/rnafusion/pull/693)
+- Update logo [#715](https://github.com/nf-core/rnafusion/pull/715)
+- Slight documentation update [#719](https://github.com/nf-core/rnafusion/pull/719)
+- Replaced local `STARFUSION_BUILD` for module from nf-core [#709](https://github.com/nf-core/rnafusion/pull/709)
+- Modified `test_build` profile to use a reduced version of Pfam and Dfam files [#733](https://github.com/nf-core/rnafusion/pull/733)
+- Updated the documentation to reflect the changes done in this release [#741](https://github.com/nf-core/rnafusion/pull/741)
+- Changed local `ARRIBA_VISUALIZATION`, `CTATSPLICING_STARTOCANCERINTRONS`, `CTATSPLICING_PREPGENOMELIB`, `FUSIONINSPECTOR`, `STARFUSION_DETECT` for its nf-core module versions [#740](https://github.com/nf-core/rnafusion/pull/740)
+- Replaced local subworkflow `TRIM_WORKFLOW` for its nf-core subworkflow equivalent `FASTQ_FASTQC_UMITOOLS_FASTP` [#752](https://github.com/nf-core/rnafusion/pull/752)
+- Changed local `FASTQ_ALIGN_STAR` for subworkflow from nf-core [#756](https://github.com/nf-core/rnafusion/pull/756)
+- Replaced local subworkflow `STRINGTIE_WORKFLOW` for its nf-core version `BAM_STRINGTIE_MERGE` and the local module module `GTF_TO_REFFLAT` for nf-core's `UCSC_GTFTOGENEPRED` [#758](https://github.com/nf-core/rnafusion/pull/758
+- Update modules and close todos as preparation for release [#759](https://github.com/nf-core/rnafusion/pull/759)
+
+### Fixed
+
+- Fixed some Nextflow run-commands in the docs [#491](https://github.com/nf-core/rnafusion/pull/491)
+- Fixed bug when trying to build indices behind a proxy and wget was unable to download arriba indices [#495](https://github.com/nf-core/rnafusion/issues/495)
+- Fixed bug in `FUSIONREPORT_DOWNLOAD` when building references with `--no_cosmic parameter` [#555](https://github.com/nf-core/rnafusion/issues/555)
+- Refactor structure in `FUSIONREPORT_DOWNLOAD` to use cosmic credentials in `ext.args` [#556](https://github.com/nf-core/rnafusion/issues/556)
+- Fixed bug in nf-core `RRNATRANSCRIPTS` module [#563](https://github.com/nf-core/rnafusion/issues/563)
+- Fixed bug in `GFFREAD` that caused output `gffread_fasta` not being produced [#565](https://github.com/nf-core/rnafusion/issues/565)
+- Fixed bug in `FUSIONCATCHER_DOWNLOAD` that caused an error when running with singularity profile [#573](https://github.com/nf-core/rnafusion/issues/573)
+- Fixed missing script `gtf2bed` which caused local module `GET_RRNA_TRANSCRIPTS` to fail [#602](https://github.com/nf-core/rnafusion/issues/602)
+- Fixed the codebase to be compatible with the Nextflow language server [#634](https://github.com/nf-core/rnafusion/pull/634)
+- Updated the input validation to be more strict. This will prevent more errors down the line in the pipeline [#640](https://github.com/nf-core/rnafusion/pull/640)
+- The `FUSIONINSPECTOR` process will no longer fail when no fusions have been found. [#651](https://github.com/nf-core/rnafusion/pull/651)
+- Fixed STAR-Fusion build would fail when downloading Pfam and Dfam resources behind SSL. [#653](https://github.com/nf-core/rnafusion/pull/653)
+- Fix bug in argument handling for FusionInspector [#669](https://github.com/nf-core/rnafusion/pull/669)
+- Upgrade STAR-Fusion to 1.15.1 to solve problem building STAR-Fusion references with `--human_gencode_filter` [#683](https://github.com/nf-core/rnafusion/pull/683)
+- Fix missing memory unit for fusioncatcher [#674](https://github.com/nf-core/rnafusion/pull/674)
+- Fix fusioncatcher download link [#693](https://github.com/nf-core/rnafusion/pull/693)
+- Fix fusionreport singularity container [#713](https://github.com/nf-core/rnafusion/pull/713)
+- Fix behavior when no fusion is present (log a warning and avoid running depending processes)[#714](https://github.com/nf-core/rnafusion/pull/714)
+- Fix CTAT-SPLICING output when no cancer introns were found [#722](https://github.com/nf-core/rnafusion/pull/722)
+- Update VCF_COLLECT script to adapt to transcript_version not being an entry in fusioninspector gtf anymore [#726](https://github.com/nf-core/rnafusion/pull/726)
+- Fix rRNA detection and make it more customizable with nf-core modules [#736](https://github.com/nf-core/rnafusion/pull/736)
+- Fix rRNA detection in GTF using `transcript_type` [#749](https://github.com/nf-core/rnafusion/pull/749)
+- Fixed nf-test for `QC_WORKFLOW` subworkflow [#756](https://github.com/nf-core/rnafusion/pull/756)
+- Fixed issue with bed creation, modifying AGAT arguments for non-coding CDS [#763](https://github.com/nf-core/rnafusion/pull/763)
+- Fixed fusioncatcher hardlink issues in filesystems that don't allow hardlinks [#764](https://github.com/nf-core/rnafusion/pull/764)
+
+### Removed
+
+- Remove fusionGDB from documentation and fusion-report download stubs [#503](https://github.com/nf-core/rnafusion/pull/503)
+- Removed test-build as reference building gets integrated in the main workflow [#505](https://github.com/nf-core/rnafusion/pull/505)
+- Removed parameter `--build_references`
+- Removed fusioncatcher build [#650](https://github.com/nf-core/rnafusion/pull/650)
+- Removed subworkflow with less than two modules: `ARRIBA_WORKFLOW` [#692](https://github.com/nf-core/rnafusion/pull/692)
+- Removed subworkflow with less than two modules: `STARFUSION_WORKFLOW` [#707](https://github.com/nf-core/rnafusion/pull/707)
+- Removed subworkflow with less than two modules: `CTATSPLICING_WORKFLOW` [#704](https://github.com/nf-core/rnafusion/pull/704)
+- Removed subworkflow with less than two modules: `FUSIONREPORT_WORKFLOW` [#721](https://github.com/nf-core/rnafusion/pull/721)
+- Removed local module `GET_RRNA_TRANSCRIPTS` [#736](https://github.com/nf-core/rnafusion/pull/736)
+- Removed old unused parameters `params.download_refs` and `params.fusioncatcher_download_link` [#752](https://github.com/nf-core/rnafusion/pull/752)
+
+### Parameters
+
+| Old parameter         | New parameter                   |
+| --------------------- | ------------------------------- |
+|                       | `--no_cosmic`                   |
+| `--build_references`  | `--references_only`             |
+| `--fastp_trim`        | `--tools fastp`                 |
+| `--arriba`            | `--tools arriba`                |
+| `--run_fusioncatcher` | `--tools fusioncatcher`         |
+| `--starfusion`        | `--tools starfusion`            |
+| `--stringtie`         | `--tools stringtie`             |
+| `--all`               | `--tools all`                   |
+|                       | `--fusioncatcher_download_link` |
+|                       | `--trim_tail_fusioncatcher`     |
+|                       | `--save_trimmed_fail`           |
+|                       | `--save_merged`                 |
+|                       | `--min_trimmed_reads`           |
+|                       | `--trim_tail_fusioncatcher`     |
+
 ## v3.0.2 - [2024-04-10]
 
 ### Added
 
 ### Changed
 
-- Update to nf-tools 2.11.1 [#457] (https://github.com/nf-core/rnafusion/pull/457)
+- Update to nf-tools 2.11.1 [#457](https://github.com/nf-core/rnafusion/pull/457)
 - Update picard collectrnaseqmetrics memory requirements to 0.8x what is provided [#474](https://github.com/nf-core/rnafusion/pull/474)
 
 ### Fixed
 
-- fix bug when using parameter "whitelist" [#466](https://github.com/nf-core/rnafusion/pull/466)
-- fix VCF_COLLECT handling when a tool is absent from FUSIONREPORT report [#458](https://github.com/nf-core/rnafusion/pull/458)
-- fix VCF_COLLECT when fusioninspector output is empty but fusionreport is not [#465](https://github.com/nf-core/rnafusion/pull/465)
-- fix VCF_COLLECT bug [#481](https://github.com/nf-core/rnafusion/pull/481)
-- fix conda package for starfusion/detect[#482](https://github.com/nf-core/rnafusion/pull/482)
-- fix logical gate so when stringtie should run but not starfusion, starfusion will not run[#482](https://github.com/nf-core/rnafusion/pull/482)
+- Fix bug when using parameter "whitelist" [#466](https://github.com/nf-core/rnafusion/pull/466)
+- Fix VCF_COLLECT handling when a tool is absent from FUSIONREPORT report [#458](https://github.com/nf-core/rnafusion/pull/458)
+- Fix VCF_COLLECT when fusioninspector output is empty but fusionreport is not [#465](https://github.com/nf-core/rnafusion/pull/465)
+- Fix VCF_COLLECT bug [#481](https://github.com/nf-core/rnafusion/pull/481)
+- Fix conda package for starfusion/detect[#482](https://github.com/nf-core/rnafusion/pull/482)
+- Fix logical gate so when stringtie should run but not starfusion, starfusion will not run[#482](https://github.com/nf-core/rnafusion/pull/482)
 
 ### Removed
 
@@ -29,7 +185,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- python3 explicit in vcf_collect [#452](https://github.com/nf-core/rnafusion/pull/452)
+- Python3 explicit in vcf_collect [#452](https://github.com/nf-core/rnafusion/pull/452)
 
 ### Fixed
 

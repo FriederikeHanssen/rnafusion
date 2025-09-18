@@ -5,7 +5,7 @@ process VCF_COLLECT {
     conda "conda-forge::pandas=1.5.2"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
         'https://depot.galaxyproject.org/singularity/pandas:1.5.2' :
-        'quay.io/biocontainers/pandas:1.5.2' }"
+        'biocontainers/pandas:1.5.2' }"
 
     input:
     tuple val(meta), path(fusioninspector_tsv), path(fusioninspector_gtf_tsv), path(fusionreport_report), path(fusionreport_csv)
@@ -14,7 +14,7 @@ process VCF_COLLECT {
 
     output:
     path "versions.yml"              , emit: versions
-    tuple val(meta), path("*vcf.gz") , emit: vcf
+    tuple val(meta), path("*vcf")    , emit: vcf
 
     when:
     task.ext.when == null || task.ext.when
@@ -23,11 +23,11 @@ process VCF_COLLECT {
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
     vcf_collect.py --fusioninspector $fusioninspector_tsv --fusionreport $fusionreport_report --fusioninspector_gtf $fusioninspector_gtf_tsv --fusionreport_csv $fusionreport_csv --hgnc $hgnc_ref --sample ${prefix} --out ${prefix}_fusion_data.vcf
-    gzip ${prefix}_fusion_data.vcf
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         python: \$(python --version | sed 's/Python //g')
+        vcf_collect: 0.1
         HGNC DB retrieval: \$(cat $hgnc_date)
     END_VERSIONS
     """
@@ -35,11 +35,12 @@ process VCF_COLLECT {
     stub:
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
-    touch ${prefix}.vcf
+    touch ${prefix}_fusion_data.vcf
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         python: \$(python --version | sed 's/Python //g')
+        vcf_collect: 0.1
     END_VERSIONS
     """
 }

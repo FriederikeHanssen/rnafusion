@@ -1,10 +1,10 @@
 {
-    "$schema": "http://json-schema.org/draft-07/schema",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
     "$id": "https://raw.githubusercontent.com/nf-core/rnafusion/master/nextflow_schema.json",
     "title": "nf-core/rnafusion pipeline parameters",
     "description": "Nextflow rnafusion analysis pipeline, part of the nf-core community.",
     "type": "object",
-    "definitions": {
+    "$defs": {
         "skip_steps": {
             "title": "Skip steps",
             "type": "object",
@@ -13,11 +13,18 @@
             "properties": {
                 "skip_qc": {
                     "type": "boolean",
-                    "description": "Skip QC steps"
+                    "description": "Skip QC steps",
+                    "fa_icon": "fas fa-forward"
+                },
+                "skip_vcf": {
+                    "type": "boolean",
+                    "description": "Skip vcf creation step",
+                    "fa_icon": "fas fa-forward"
                 },
                 "skip_vis": {
                     "type": "boolean",
-                    "description": "Skip visualisation steps"
+                    "description": "Skip visualisation steps",
+                    "fa_icon": "fas fa-forward"
                 }
             },
             "fa_icon": "fas fa-fast-forward"
@@ -27,16 +34,16 @@
             "type": "object",
             "fa_icon": "fas fa-terminal",
             "description": "Define where the pipeline should find input data and save output data.",
-            "required": ["genomes_base", "outdir"],
+            "required": ["outdir", "genomes_base", "tools"],
             "properties": {
                 "input": {
                     "type": "string",
                     "format": "file-path",
-                    "exists": false,
-                    "schema": "assets/schema_input.json",
                     "mimetype": "text/csv",
-                    "pattern": "^\\S+\\.csv$",
-                    "description": "Path to comma-separated file containing information about the samples in the experiment.",
+                    "schema": "assets/schema_input.json",
+                    "exists": true,
+                    "pattern": "^\\S+\\.(csv|yaml|yml|json)$",
+                    "description": "Path to samplesheet file containing information about the samples in the experiment.",
                     "help_text": "You will need to create a design file with information about the samples in your experiment before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with 3 columns, and a header row. See [usage docs](https://nf-co.re/rnafusion/usage#samplesheet-input).",
                     "fa_icon": "fas fa-file-csv"
                 },
@@ -58,11 +65,6 @@
                     "description": "MultiQC report title. Printed as page header, used for filename if not otherwise specified.",
                     "fa_icon": "fas fa-file-signature"
                 },
-                "build_references": {
-                    "type": "boolean",
-                    "fa_icon": "far fa-file-code",
-                    "description": "Specifies which analysis type for the pipeline - either build references or analyse data"
-                },
                 "cosmic_username": {
                     "type": "string",
                     "fa_icon": "far fa-file-code",
@@ -78,120 +80,118 @@
                     "fa_icon": "far fa-file-code",
                     "description": "Path to reference folder"
                 },
-                "ensembl_version": {
-                    "type": "integer",
-                    "fa_icon": "far fa-file-code",
-                    "description": "ensembl version",
-                    "default": 102
-                },
-                "starfusion_build": {
+                "genomes_ignore": {
                     "type": "boolean",
                     "fa_icon": "far fa-file-code",
-                    "description": "If set, starfusion references are built from scratch instead of downloaded (default)"
+                    "description": "Don't automatically assign reference parameters to the correct references in --genomes_base"
+                },
+                "genome_gencode_version": {
+                    "type": "integer",
+                    "fa_icon": "far fa-file-code",
+                    "description": "gencode version"
+                },
+                "tools": {
+                    "type": "string",
+                    "description": "Comma-delimited list of tools to run",
+                    "fa_icon": "far fa-file-code",
+                    "pattern": "^((arriba|ctatsplicing|fusioncatcher|starfusion|stringtie|fusionreport|fastp|salmon|fusioninspector|all)?,?)*(?<!,)$"
                 },
                 "read_length": {
                     "type": "integer",
                     "fa_icon": "far fa-file-code",
-                    "description": "Read length",
-                    "default": 100
-                },
-                "all": {
-                    "type": "boolean",
-                    "fa_icon": "far fa-file-code",
-                    "description": "Build or run all references/analyses"
-                },
-                "arriba": {
-                    "type": "boolean",
-                    "fa_icon": "far fa-file-code",
-                    "description": "Build or run arriba references/analyses"
-                },
-                "arriba_ref": {
-                    "type": "string",
-                    "fa_icon": "far fa-file-code",
-                    "description": "Path to arriba references"
+                    "description": "The length of the reads provided to the pipeline. This is used for the '--sjdbOverhang' option of STAR as read_length - 1. Providing 1 to this option will disable overhang handling.",
+                    "default": 100,
+                    "minimum": 1
                 },
                 "arriba_ref_blacklist": {
                     "type": "string",
+                    "format": "file-path",
+                    "pattern": "\\S+\\.tsv(\\.gz)?$",
                     "fa_icon": "far fa-file-code",
                     "description": "Path to arriba reference blacklist"
                 },
                 "arriba_ref_cytobands": {
                     "type": "string",
+                    "format": "file-path",
+                    "pattern": "\\S+\\.tsv$",
                     "fa_icon": "far fa-file-code",
                     "description": "Path to arriba reference cytobands"
                 },
                 "arriba_ref_known_fusions": {
                     "type": "string",
+                    "format": "file-path",
+                    "pattern": "\\S+\\.tsv(\\.gz)?$",
                     "fa_icon": "far fa-file-code",
                     "description": "Path to arriba reference known fusions"
                 },
                 "arriba_ref_protein_domains": {
                     "type": "string",
+                    "format": "file-path",
+                    "pattern": "\\S+\\.gff3$",
                     "fa_icon": "far fa-file-code",
                     "description": "Path to arriba reference protein domain"
                 },
                 "arriba_fusions": {
                     "type": "string",
+                    "format": "file-path",
+                    "exists": true,
+                    "pattern": "\\S+\\.tsv$",
                     "fa_icon": "far fa-file-code",
                     "description": "Path to arriba output"
                 },
-                "ensembl_ref": {
-                    "type": "string",
-                    "fa_icon": "far fa-file-code",
-                    "description": "Path to ensembl references"
-                },
-                "fusioncatcher": {
-                    "type": "boolean",
-                    "fa_icon": "far fa-file-code",
-                    "description": "Build or run fusioncatcher references/analyses"
-                },
                 "fusioncatcher_fusions": {
                     "type": "string",
+                    "format": "file-path",
+                    "exists": true,
+                    "pattern": "\\S+\\.txt$",
                     "fa_icon": "far fa-file-code",
                     "description": "Path to fusioncatcher output"
                 },
                 "fusioncatcher_limitSjdbInsertNsj": {
                     "type": "integer",
                     "fa_icon": "far fa-file-code",
-                    "description": "Use limitSjdbInsertNsj with int for fusioncatcher"
+                    "description": "Use limitSjdbInsertNsj with int for fusioncatcher",
+                    "default": 2000000,
+                    "minimum": 1
                 },
                 "fusioncatcher_ref": {
                     "type": "string",
+                    "format": "directory-path",
                     "fa_icon": "far fa-file-code",
                     "description": "Path to fusioncatcher references"
                 },
                 "fusioninspector_limitSjdbInsertNsj": {
                     "type": "integer",
                     "fa_icon": "far fa-file-code",
-                    "description": "Use limitSjdbInsertNsj with int for fusioninspector STAR process"
-                },
-                "fusioninspector_only": {
-                    "type": "boolean",
-                    "fa_icon": "far fa-file-code",
-                    "description": "Skip fusion-report. --fusioninspector_fusions PATH needed to provide a fusion list as input"
+                    "description": "Use limitSjdbInsertNsj with int for fusioninspector STAR process",
+                    "default": 1000000,
+                    "minimum": 1
                 },
                 "fusioninspector_fusions": {
                     "type": "string",
+                    "format": "file-path",
+                    "exists": true,
+                    "pattern": "\\S+\\.tsv$",
                     "fa_icon": "far fa-file-code",
                     "description": "Path to a fusion list file built with format GENE1--GENE2"
                 },
-                "fusionreport": {
-                    "type": "boolean",
-                    "fa_icon": "far fa-file-code",
-                    "description": "Build fusionreport references"
-                },
                 "fusionreport_ref": {
                     "type": "string",
+                    "format": "directory-path",
                     "fa_icon": "far fa-file-code",
                     "description": "Path to fusionreport references"
                 },
                 "hgnc_ref": {
                     "type": "string",
+                    "format": "file-path",
+                    "pattern": "\\S+\\.txt$",
                     "fa_icon": "far fa-file-code",
                     "description": "Path to HGNC database file"
                 },
                 "hgnc_date": {
                     "type": "string",
+                    "format": "file-path",
+                    "pattern": "\\S+\\.txt$",
                     "fa_icon": "far fa-file-code",
                     "description": "Path to HGNC timestamp file for database retrieval"
                 },
@@ -200,43 +200,109 @@
                     "fa_icon": "far fa-file-code",
                     "description": "Use QIAGEN instead of SANGER to download COSMIC database"
                 },
-                "starfusion": {
-                    "type": "boolean",
+                "salmon_index": {
+                    "type": "string",
+                    "format": "directory-path",
                     "fa_icon": "far fa-file-code",
-                    "description": "Build or run starfusion references/analyses"
+                    "description": "Path to salmon index"
                 },
                 "starfusion_fusions": {
                     "type": "string",
+                    "format": "file-path",
+                    "exists": true,
+                    "pattern": "\\S+\\.tsv$",
                     "fa_icon": "far fa-file-code",
                     "description": "Path to starfusion output"
                 },
                 "starfusion_ref": {
                     "type": "string",
+                    "format": "directory-path",
                     "fa_icon": "far fa-file-code",
                     "description": "Path to starfusion references"
                 },
-                "starindex": {
-                    "type": "boolean",
-                    "fa_icon": "far fa-file-code",
-                    "description": "Build or run starindex references/analyses"
+                "ctatsplicing_cancer_introns": {
+                    "type": "string",
+                    "format": "file-path",
+                    "pattern": "\\S+\\.tsv\\.gz$",
+                    "exists": true,
+                    "description": "Path to the cancer introns CSV file to create the CTAT-SPLICING reference with",
+                    "default": "https://data.broadinstitute.org/Trinity/CTAT_RESOURCE_LIB/CANCER_SPLICING_LIB_SUPPLEMENT/cancer_introns.GRCh38.Jun232020.tsv.gz"
+                },
+                "dfam_hmm": {
+                    "type": "string",
+                    "format": "file-path",
+                    "pattern": "\\S+\\.hmm$",
+                    "description": "Path to Dfam HMM database file",
+                    "help_text": "Provide a valid path pointing to the Dfam HMM database file. Leave as null if using the automatical filling with `--dfam_version` and `--species`.",
+                    "fa_icon": "fas fa-link"
+                },
+                "dfam_h3f": {
+                    "type": "string",
+                    "format": "file-path",
+                    "pattern": "\\S+\\.h3f$",
+                    "description": "Path to Dfam H3F database file",
+                    "help_text": "Provide a valid path pointing to the Dfam H3F database file. Leave as null if using the automatical filling with `--dfam_version` and `--species`.",
+                    "fa_icon": "fas fa-link"
+                },
+                "dfam_h3i": {
+                    "type": "string",
+                    "format": "file-path",
+                    "pattern": "\\S+\\.h3i$",
+                    "description": "Path to Dfam H3I database file",
+                    "help_text": "Provide a valid path pointing to the Dfam H3I database file. Leave as null if using the automatical filling with `--dfam_version` and `--species`.",
+                    "fa_icon": "fas fa-link"
+                },
+                "dfam_h3m": {
+                    "type": "string",
+                    "format": "file-path",
+                    "pattern": "\\S+\\.h3m$",
+                    "description": "Path to Dfam H3M database file",
+                    "help_text": "Provide a valid path pointing to the Dfam H3M database file. Leave as null if using the automatical filling with `--dfam_version` and `--species`.",
+                    "fa_icon": "fas fa-link"
+                },
+                "dfam_h3p": {
+                    "type": "string",
+                    "format": "file-path",
+                    "pattern": "\\S+\\.h3p$",
+                    "description": "Path to Dfam H3P database file",
+                    "help_text": "Provide a valid path pointing to the Dfam H3P database file. Leave as null if using the automatical filling with `--dfam_version` and `--species`.",
+                    "fa_icon": "fas fa-link"
+                },
+                "pfam_file": {
+                    "type": "string",
+                    "format": "file-path",
+                    "pattern": "\\S+\\.hmm(\\.gz)?$",
+                    "description": "Path to Pfam database file",
+                    "help_text": "Provide a valid path pointing to the Pfam database file. Leave as null if using the automatical filling with `--pfam_version`.",
+                    "fa_icon": "fas fa-link"
+                },
+                "annot_filter_url": {
+                    "type": "string",
+                    "format": "uri",
+                    "pattern": "^https?://.*",
+                    "description": "URL to annotation filter rule file",
+                    "help_text": "Provide a valid HTTP/HTTPS URL pointing to the annotation filter rule file (typically a Perl module).",
+                    "default": "https://data.broadinstitute.org/Trinity/CTAT_RESOURCE_LIB/AnnotFilterRule.pm",
+                    "fa_icon": "fas fa-filter"
                 },
                 "starindex_ref": {
                     "type": "string",
+                    "format": "directory-path",
                     "fa_icon": "far fa-file-code",
                     "description": "Path to starindex references"
                 },
-                "stringtie": {
-                    "type": "boolean",
-                    "fa_icon": "far fa-file-code",
-                    "description": "Run stringtie analysis"
-                },
                 "tools_cutoff": {
                     "type": "integer",
+                    "minimum": 1,
+                    "default": 1,
                     "fa_icon": "far fa-file-code",
                     "description": "Discard fusions identified by less than INT tools"
                 },
                 "whitelist": {
                     "type": "string",
+                    "format": "file-path",
+                    "exists": true,
+                    "pattern": "\\S+\\.tsv$",
                     "fa_icon": "far fa-file-code",
                     "description": "Path to fusions to add to the input of fusioninspector"
                 }
@@ -248,20 +314,41 @@
             "fa_icon": "fas fa-cut",
             "description": "Options to adjust read trimming criteria.",
             "properties": {
-                "fastp_trim": {
-                    "type": "boolean",
-                    "description": "Preform fastp trimming of reads, default: false",
-                    "fa_icon": "fas fa-cut"
-                },
                 "trim_tail": {
                     "type": "integer",
-                    "description": "Preform tail trimming of reads, default: null",
+                    "description": "The amount of bases to trim at the tail of each read, none will be trimmed by default",
+                    "minimum": 0,
+                    "fa_icon": "fas fa-cut"
+                },
+                "trim_tail_fusioncatcher": {
+                    "type": "integer",
+                    "description": "The amount of bases to trim at the tail of each read for fusioncatcher, none will be trimmed by default",
+                    "minimum": 0,
                     "fa_icon": "fas fa-cut"
                 },
                 "adapter_fasta": {
                     "type": "string",
+                    "format": "file-path",
+                    "exists": true,
+                    "pattern": "\\S+\\.f(n|ast)?a$",
                     "description": "Path to adapter fasta file: default: []",
                     "fa_icon": "fas fa-cut"
+                },
+                "save_trimmed_fail": {
+                    "type": "boolean",
+                    "fa_icon": "far fa-times-circle",
+                    "description": "FASTP: Specify true to save files that failed to pass trimming thresholds"
+                },
+                "min_trimmed_reads": {
+                    "type": "integer",
+                    "default": 1,
+                    "fa_icon": "fas fa-search-minus",
+                    "description": "FASTP: Inputs with fewer than this reads will be filtered out of the \"reads\" output channel"
+                },
+                "save_merged": {
+                    "type": "boolean",
+                    "fa_icon": "fas fa-download",
+                    "description": "FASTP: Specify true to save merged reads"
                 }
             }
         },
@@ -272,8 +359,8 @@
             "description": "Option to compress BAM files to CRAM.",
             "properties": {
                 "cram": {
-                    "type": "string",
-                    "description": "List of tools for which to compress BAM file to CRAM,default: [], options: arriba, starfusion. Leave no space between options",
+                    "type": "boolean",
+                    "description": "Output CRAM files instead of BAM files.",
                     "fa_icon": "fas fa-cut"
                 }
             }
@@ -284,9 +371,9 @@
             "fa_icon": "fas fa-dna",
             "description": "Reference genome related files and options required for the workflow.",
             "properties": {
-                "genome": {
-                    "type": "string",
-                    "description": "Name of iGenomes reference.",
+                "references_only": {
+                    "type": "boolean",
+                    "description": "Skip running the analysis, only builds the references",
                     "fa_icon": "fas fa-book"
                 },
                 "fasta": {
@@ -305,34 +392,21 @@
                     "description": "Path to FASTA genome index file.",
                     "fa_icon": "far fa-file-code"
                 },
+                "genome": {
+                    "type": "string",
+                    "description": "Name of iGenomes reference.",
+                    "fa_icon": "fas fa-book"
+                },
                 "gtf": {
                     "type": "string",
                     "format": "file-path",
-                    "mimetype": "text/plain",
                     "pattern": "^\\S+\\.gtf?(\\.gz)?$",
-                    "description": "Path to GTF genome file.",
-                    "fa_icon": "far fa-file-code"
-                },
-                "chrgtf": {
-                    "type": "string",
-                    "format": "file-path",
-                    "mimetype": "text/plain",
-                    "pattern": "^\\S+\\.gtf?(\\.gz)?$",
-                    "description": "Path to GTF genome file.",
-                    "fa_icon": "far fa-file-code"
-                },
-                "transcript": {
-                    "type": "string",
-                    "format": "file-path",
-                    "mimetype": "text/plain",
-                    "pattern": "^\\S+\\.fn?a(sta)?(\\.gz)?$",
                     "description": "Path to GTF genome file.",
                     "fa_icon": "far fa-file-code"
                 },
                 "refflat": {
                     "type": "string",
                     "format": "file-path",
-                    "mimetype": "text/plain",
                     "pattern": "^\\S+\\.refflat?$",
                     "description": "Path to GTF genome file.",
                     "fa_icon": "far fa-file-code"
@@ -340,10 +414,38 @@
                 "rrna_intervals": {
                     "type": "string",
                     "format": "file-path",
-                    "mimetype": "text/plain",
                     "pattern": "^\\S+\\.interval_list?$",
                     "description": "Path to ribosomal interval list.",
                     "fa_icon": "far fa-file-code"
+                },
+                "no_cosmic": {
+                    "type": "boolean",
+                    "fa_icon": "far fa-file-code",
+                    "description": "Avoid using Cosmic DB (for example in clinical case applications where a paid license applies."
+                },
+                "fusion_annot_lib": {
+                    "type": "string",
+                    "format": "file-path",
+                    "exists": true,
+                    "pattern": "\\S+\\.dat\\.gz$",
+                    "description": "Path to Fusion Annotation Library to be used in STARFUSION_BUILD.",
+                    "fa_icon": "far fa-file-code"
+                },
+                "species": {
+                    "type": "string",
+                    "description": "Which species dfam should automatically download, default: homo_sapiens.",
+                    "fa_icon": "far fa-file-code",
+                    "default": "homo_sapiens"
+                },
+                "dfam_version": {
+                    "type": ["number", "null"],
+                    "description": "Version of dfam to use",
+                    "fa_icon": "fas fa-code-branch"
+                },
+                "pfam_version": {
+                    "type": ["number", "null"],
+                    "description": "Version of pfam to use",
+                    "fa_icon": "fas fa-code-branch"
                 }
             }
         },
@@ -395,41 +497,6 @@
                 }
             }
         },
-        "max_job_request_options": {
-            "title": "Max job request options",
-            "type": "object",
-            "fa_icon": "fab fa-acquisitions-incorporated",
-            "description": "Set the top limit for requested resources for any single job.",
-            "help_text": "If you are running on a smaller system, a pipeline step requesting more resources than are available may cause the Nextflow to stop the run with an error. These options allow you to cap the maximum resources requested by any single job so that the pipeline will run on your system.\n\nNote that you can not _increase_ the resources requested by any job using these options. For that you will need your own configuration file. See [the nf-core website](https://nf-co.re/usage/configuration) for details.",
-            "properties": {
-                "max_cpus": {
-                    "type": "integer",
-                    "description": "Maximum number of CPUs that can be requested for any single job.",
-                    "default": 16,
-                    "fa_icon": "fas fa-microchip",
-                    "hidden": true,
-                    "help_text": "Use to set an upper-limit for the CPU requirement for each process. Should be an integer e.g. `--max_cpus 1`"
-                },
-                "max_memory": {
-                    "type": "string",
-                    "description": "Maximum amount of memory that can be requested for any single job.",
-                    "default": "128.GB",
-                    "fa_icon": "fas fa-memory",
-                    "pattern": "^\\d+(\\.\\d+)?\\.?\\s*(K|M|G|T)?B$",
-                    "hidden": true,
-                    "help_text": "Use to set an upper-limit for the memory requirement for each process. Should be a string in the format integer-unit e.g. `--max_memory '8.GB'`"
-                },
-                "max_time": {
-                    "type": "string",
-                    "description": "Maximum amount of time that can be requested for any single job.",
-                    "default": "240.h",
-                    "fa_icon": "far fa-clock",
-                    "pattern": "^(\\d+\\.?\\s*(s|m|h|d|day)\\s*)+$",
-                    "hidden": true,
-                    "help_text": "Use to set an upper-limit for the time requirement for each process. Should be a string in the format integer-unit e.g. `--max_time '2.h'`"
-                }
-            }
-        },
         "generic_options": {
             "title": "Generic options",
             "type": "object",
@@ -437,12 +504,6 @@
             "description": "Less common options for the pipeline, typically set in a config file.",
             "help_text": "These options are common to all nf-core pipelines and allow you to customise some of the core preferences for how the pipeline runs.\n\nTypically these options would be set in a Nextflow config file loaded for all pipeline runs, such as `~/.nextflow/config`.",
             "properties": {
-                "help": {
-                    "type": "boolean",
-                    "description": "Display help text.",
-                    "fa_icon": "fas fa-question-circle",
-                    "hidden": true
-                },
                 "version": {
                     "type": "boolean",
                     "description": "Display version and exit.",
@@ -518,38 +579,28 @@
                     "fa_icon": "fas fa-check-square",
                     "hidden": true
                 },
-                "validationShowHiddenParams": {
-                    "type": "boolean",
-                    "fa_icon": "far fa-eye-slash",
-                    "description": "Show all params when using `--help`",
-                    "hidden": true,
-                    "help_text": "By default, parameters set as _hidden_ in the schema are not shown on the command line when a user runs with `--help`. Specifying this option will tell the pipeline to show all parameters."
-                },
-                "validationFailUnrecognisedParams": {
-                    "type": "boolean",
+                "pipelines_testdata_base_path": {
+                    "type": "string",
                     "fa_icon": "far fa-check-circle",
-                    "description": "Validation of parameters fails when an unrecognised parameter is found.",
-                    "hidden": true,
-                    "help_text": "By default, when an unrecognised parameter is found, it returns a warinig."
+                    "description": "Base URL or local path to location of pipeline test dataset files",
+                    "default": "https://raw.githubusercontent.com/nf-core/test-datasets/",
+                    "hidden": true
                 },
-                "validationLenientMode": {
-                    "type": "boolean",
-                    "fa_icon": "far fa-check-circle",
-                    "description": "Validation of parameters in lenient more.",
-                    "hidden": true,
-                    "help_text": "Allows string values that are parseable as numbers or booleans. For further information see [JSONSchema docs](https://github.com/everit-org/json-schema#lenient-mode)."
+                "trace_report_suffix": {
+                    "type": "string",
+                    "fa_icon": "far calendar",
+                    "description": "Suffix to add to the trace report filename. Default is the date and time in the format yyyy-MM-dd_HH-mm-ss.",
+                    "hidden": true
                 },
                 "seq_center": {
                     "type": "string",
-                    "description": "Sequencing center",
-                    "hidden": true,
+                    "description": "Sequencing center, used to fill in read group CN tag in the BAM header",
                     "fa_icon": "fas fa-toolbox",
                     "help_text": "This will reported in the BAM header as CN"
                 },
                 "seq_platform": {
                     "type": "string",
-                    "description": "Sequencing platform",
-                    "hidden": true,
+                    "description": "Sequencing platform, used to fill in read group PL tag in the BAM header",
                     "fa_icon": "fas fa-toolbox",
                     "help_text": "This will reported in the BAM header as PL."
                 },
@@ -559,34 +610,37 @@
                     "hidden": true,
                     "fa_icon": "fas fa-toolbox",
                     "help_text": "Setting false will use GTF file for STAR alignment"
+                },
+                "star_limit_bam_sort_ram": {
+                    "type": "integer",
+                    "description": "The maximum amount of RAM to use for sorting the BAM file in STAR. Should by in bits. Setting this value to `0` will use the default amount of STAR.",
+                    "fa_icon": "fas fa-toolbox",
+                    "minimum": 0
                 }
             }
         }
     },
     "allOf": [
         {
-            "$ref": "#/definitions/skip_steps"
+            "$ref": "#/$defs/skip_steps"
         },
         {
-            "$ref": "#/definitions/input_output_options"
+            "$ref": "#/$defs/input_output_options"
         },
         {
-            "$ref": "#/definitions/read_trimming_options"
+            "$ref": "#/$defs/read_trimming_options"
         },
         {
-            "$ref": "#/definitions/compression_options"
+            "$ref": "#/$defs/compression_options"
         },
         {
-            "$ref": "#/definitions/reference_genome_options"
+            "$ref": "#/$defs/reference_genome_options"
         },
         {
-            "$ref": "#/definitions/institutional_config_options"
+            "$ref": "#/$defs/institutional_config_options"
         },
         {
-            "$ref": "#/definitions/max_job_request_options"
-        },
-        {
-            "$ref": "#/definitions/generic_options"
+            "$ref": "#/$defs/generic_options"
         }
     ]
 }
