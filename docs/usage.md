@@ -83,10 +83,6 @@ nextflow run nf-core/rnafusion \
   --outdir <OUTPUT/PATH> --qiagen
 ```
 
-<!-- #### STAR-Fusion references downloaded vs built
-
-By default STAR-Fusion references are **built**. You can also download them from [CTAT](https://github.com/NCIP/Trinity_CTAT/wiki) by using the flag `--starfusion_build FALSE` for both reference building and fusion detection. This allows more flexibility for different organisms but **be aware that STAR-Fusion reference download is not recommended as not fully tested!** -->
-
 #### Issues with building references
 
 If process `FUSIONREPORT_DOWNLOAD` times out, it could be due to network restriction (for example if trying to run on HPC). As this process is lightweight in cpu, memory and time, running on local machines with the following options might solve the issue:
