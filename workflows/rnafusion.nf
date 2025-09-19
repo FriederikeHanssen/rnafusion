@@ -188,8 +188,8 @@ workflow RNAFUSION {
             .filter { meta, _fastqs -> meta.align }
 
         // Add the alignment files to the correct channel if their fastqs aren't aligned
-        def ch_aligned_reads        = ch_aligned_inputs
-        def ch_star_junctions       = ch_input.junctions.filter { meta, file -> file && !meta.align }
+        def ch_aligned_reads         = ch_aligned_inputs
+        def ch_star_junctions        = ch_input.junctions.filter { meta, file -> file && !meta.align }
         def ch_star_splice_junctions = ch_input.splice_junctions.filter { meta, file -> file && !meta.align }
         if(tools.intersect(["ctatsplicing", "arriba", "starfusion", "stringtie"])) {
             FASTQ_ALIGN_STAR(
@@ -221,9 +221,6 @@ workflow RNAFUSION {
             def ch_ctatsplicing_input = ch_star_splice_junctions
                 .join(ch_star_junctions, failOnMismatch:true, failOnDuplicate:true)
                 .join(ch_aligned_reads, failOnMismatch:true, failOnDuplicate:true)
-                .map { meta, split_junction, junction, bam, bai ->
-                    [ meta, split_junction, junction, bam, bai ]
-                }
 
             CTATSPLICING_STARTOCANCERINTRONS(
                 ch_ctatsplicing_input,
