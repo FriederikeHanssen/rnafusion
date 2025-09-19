@@ -1,5 +1,12 @@
 #!/usr/bin/env python3
 
+# Author: Annick Renevey, annick.renevey@scilifelab.se
+# License: MIT
+#
+# This script is part of the rnafusion pipeline.
+# For full license and authorship information, see the repository README.
+#
+
 import argparse
 import logging
 import sys

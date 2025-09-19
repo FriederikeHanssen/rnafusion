@@ -83,10 +83,6 @@ nextflow run nf-core/rnafusion \
   --outdir <OUTPUT/PATH> --qiagen
 ```
 
-<!-- #### STAR-Fusion references downloaded vs built
-
-By default STAR-Fusion references are **built**. You can also download them from [CTAT](https://github.com/NCIP/Trinity_CTAT/wiki) by using the flag `--starfusion_build FALSE` for both reference building and fusion detection. This allows more flexibility for different organisms but **be aware that STAR-Fusion reference download is not recommended as not fully tested!** -->
-
 #### Issues with building references
 
 If process `FUSIONREPORT_DOWNLOAD` times out, it could be due to network restriction (for example if trying to run on HPC). As this process is lightweight in cpu, memory and time, running on local machines with the following options might solve the issue:
@@ -280,9 +276,9 @@ nextflow run nf-core/rnafusion \
 --adapter_fasta <PATH/TO/ADAPTER/FASTA> (optional)
 ```
 
-The additional `--trim_tail_fusioncatcher` flag will toggle an additional `fastp` process, especially useful is reads are above 100 bp, which is not handled well by FusionCatcher. The parameter `--trim_tail_fusioncatcher` needs to be provided with the number of bases to remove from the tail end.
+The additional `--trim_tail_fusioncatcher` flag will toggle an additional `fastp` process, especially useful if reads are above 100 bp, which is not handled well by FusionCatcher. The parameter `--trim_tail_fusioncatcher` needs to be provided with the number of bases to remove from the tail end.
 
-#### Filter fusions detected by 2 or more tools
+#### Filter for fusions detected by several tools
 
 ```bash
 nextflow run nf-core/rnafusion \
@@ -427,7 +423,7 @@ Use this parameter to choose a configuration profile. Profiles can give configur
 Several generic profiles are bundled with the pipeline which instruct the pipeline to use software packaged using different methods (Docker, Singularity, Podman, Shifter, Charliecloud, Apptainer, Conda) - see below.
 
 > [!IMPORTANT]
-> We highly recommend the use of Docker or Singularity containers for full pipeline reproducibility, however when this is not possible, Conda is also supported.
+> We highly recommend the use of Docker or Singularity containers, ctatsplicing is not supported by Conda and Conda was not specifically tested for the rest of the pipeline.
 
 The pipeline also dynamically loads configurations from [https://github.com/nf-core/configs](https://github.com/nf-core/configs) when it runs, making multiple config profiles for various institutional clusters available at run time. For more information and to check if your system is supported, please see the [nf-core/configs documentation](https://github.com/nf-core/configs#documentation).
 
@@ -480,9 +476,9 @@ To change the resource requests, please see the [max resources](https://nf-co.re
 
 ### Custom Containers
 
-In some cases, you may wish to change the container or conda environment used by a pipeline steps for a particular tool. By default, nf-core pipelines use containers and software from the [biocontainers](https://biocontainers.pro/) or [bioconda](https://bioconda.github.io/) projects. However, in some cases the pipeline specified version maybe out of date.
+In some cases, you may wish to change the container used by a pipeline steps for a particular tool. By default, nf-core pipelines use containers and software from the [biocontainers](https://biocontainers.pro/) or [bioconda](https://bioconda.github.io/) projects (via wave for docker and singularity).
 
-To use a different container from the default container or conda environment specified in a pipeline, please see the [updating tool versions](https://nf-co.re/docs/usage/configuration#updating-tool-versions) section of the nf-core website.
+To use a different container from the default container specified in a pipeline, please see the [updating tool versions](https://nf-co.re/docs/usage/configuration#updating-tool-versions) section of the nf-core website.
 
 ### Custom Tool Arguments
 
