@@ -128,8 +128,7 @@
                     "exists": true,
                     "pattern": "\\S+\\.f(n|ast)?a$",
                     "description": "Path to adapter fasta file: default: []",
-                    "fa_icon": "fas fa-cut",
-                    "default": "[]"
+                    "fa_icon": "fas fa-cut"
                 },
                 "save_trimmed_fail": {
                     "type": "boolean",
